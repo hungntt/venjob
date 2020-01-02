@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
-  has_many :saved_job
+  has_many :saved_jobs
   has_many :active_requests,  class_name: "Request",
                               foreign_key: "sent_user_id",
                               dependent: :destroy
