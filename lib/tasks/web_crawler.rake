@@ -3,7 +3,7 @@ require 'net/ftp'
 require 'zip'
 require 'csv'
 
-namespace :web_city_crawler do
+namespace :job do
   desc "The crawler for City"
 
   task :web_city_import => :environment do
@@ -18,9 +18,9 @@ namespace :web_city_crawler do
     end
 
   end
-end
 
-namespace :web_job_crawler do
+
+
   desc "This is the crawler from CareerBuilder"
 
   task :web_job_import => :environment do
@@ -115,9 +115,9 @@ namespace :web_job_crawler do
       end
     end
   end
-end
 
-namespace :csv_job_crawler do
+
+
   desc "CSV job crawler"
 
   task :csv_import => :environment do
