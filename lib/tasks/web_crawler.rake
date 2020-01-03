@@ -20,7 +20,6 @@ namespace :job do
   end
 
 
-
   desc "This is the crawler from CareerBuilder"
 
   task :web_job_import => :environment do
@@ -92,17 +91,19 @@ namespace :job do
         end
         create_company(comp_name, comp_address, comp_desc)
 
-        Job.create!([code: job_code,
-                     name: job_name,
-                     salary: job_salary,
-                     deadline: job_deadline,
-                     description: job_desc,
-                     requirement: job_req,
-                     last_updated: job_update,
-                     position: job_position,
-                     experience: job_exp,
-                     city_id: job_workplace,
-                     company_id: comp_id])
+        job_workplace.split(",").each do |workplace|
+          Job.create!([code: job_code,
+                       name: job_name,
+                       salary: job_salary,
+                       deadline: job_deadline,
+                       description: job_desc,
+                       requirement: job_req,
+                       last_updated: job_update,
+                       position: job_position,
+                       experience: job_exp,
+                       city_id: workplace,
+                       company_id: comp_id])
+        end
 
         job_id = Job.last.id
 
@@ -117,7 +118,6 @@ namespace :job do
   end
 
 
-
   desc "CSV job crawler"
 
   task :csv_import => :environment do
@@ -127,11 +127,7 @@ namespace :job do
         entry.extract { true }
       end
     end
-    table = CSV.parse(File.read("jobs.csv"), headers: true)
-    num_row = table.count - 2
-    puts num_row
-    (0..num_row).each do |row|
-      puts row
+    CSV.foreach(File.read("jobs.csv"), headers: true) do |row|
       job_industry = table[row][1]
       comp_address = table[row][2]
       comp_name = table[row][5]
@@ -149,6 +145,8 @@ namespace :job do
         create_company(comp_name, comp_address)
         comp_id = Company.last.id
       end
+      city_id = get_city_id(job_workplace)
+      company_id = get_company_id(comp_name, city_id, comp_address, nil)
 
       Job.create!([name: job_name,
                    salary: job_salary,
@@ -168,29 +166,28 @@ namespace :job do
   end
 end
 
-def create_company(comp_name, comp_address, comp_desc = nil)
-  Company.create!([name: comp_name,
-                   address: comp_address,
-                   description: comp_desc])
+def create_job(company_id, city_id, job_code, job_name, job_salary, job_deadline, job_desc, job_req, job_update, job_position, job_exp)
+  job_code ||= nil
+  job_deadline ||= nil
+  job = Job.find_or_initialize_by(company_id: company_id, city_id: city_id)
+  job.update(code: job_code,
+             name: job_name,
+             salary: job_salary,
+             deadline: job_deadline,
+             description: job_desc,
+             requirement: job_req,
+             last_updated: job_update,
+             position: job_position,
+             experience: job_exp)
+end
+
+def get_company_id(comp_name, city_id, comp_address, comp_desc)
+  comp_desc ||= nil
+  company = Company.find_or_initialize_by(name: comp_name, city_id: city_id)
+  company.update(address: comp_address, description: comp_desc)
 end
 
 def get_city_id(name, region = "Việt Nam")
-  if City.exists?(name: name)
-    City.find_by(name: name).id
-  else
-    begin
-      name = JSON.parse(name)[0]
-      if name
-        if City.exists?(name: name)
-          City.find_by(name: name).id
-        else
-          City.create(name: name, region: region)
-          City.last.id
-        end
-      end
-    rescue ParseError
-      City.create(name: name, region: region)
-      City.last.id
-    end
-  end
+  name = JSON.parse(name)[0] rescue name
+  City.find_or_create_by(name: name, region: region).id
 end
