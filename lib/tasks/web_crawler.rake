@@ -122,7 +122,11 @@ namespace :csv_job_crawler do
 
   task :csv_import => :environment do
     Net::FTP.open('192.168.1.156', 'training', 'training')
-    Zip::File.open("jobs.zip")
+    Zip::File.open("jobs.zip") do |zip_file|
+      zip_file.each do |entry|
+        entry.extract { true }
+      end
+    end
     table = CSV.parse(File.read("jobs.csv"), headers: true)
     num_row = table.count - 2
     puts num_row
