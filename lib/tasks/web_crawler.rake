@@ -6,7 +6,7 @@ require 'csv'
 namespace :web_city_crawler do
   desc "The crawler for City"
 
-  task :web_city_crawl => :environment do
+  task :web_city_import => :environment do
     page = Nokogiri::HTML.parse(open('https://www.vnnic.vn/tenmien/hotro/danh-s%C3%A1ch-c%C3%A1c-t%E1%BB%89nh-th%C3%A0nh-v%C3%A0-th%C3%A0nh-ph%E1%BB%91?lang=en')); nil
     cities = page.at("table").text.gsub("\n\t\t\t", ",").gsub("\n", ",").partition("Các tỉnh,Thành phố,").last.split(",")
     cities.each_with_index do |city, index|
@@ -23,7 +23,7 @@ end
 namespace :web_job_crawler do
   desc "This is the crawler from CareerBuilder"
 
-  task :web_job_crawl => :environment do
+  task :web_job_import => :environment do
     page = Nokogiri::HTML.parse(open('https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-vi.html')); nil
     num_job = page.at("div[class='ais-stats'] h1[class='col-sm-10'] span").text.gsub(",", "").to_f
     num_pages = (num_job / 50).floor
@@ -120,7 +120,7 @@ end
 namespace :csv_job_crawler do
   desc "CSV job crawler"
 
-  task :csv_job_crawl => :environment do
+  task :csv_import => :environment do
     Net::FTP.open('192.168.1.156', 'training', 'training')
     Zip::File.open("jobs.zip")
     table = CSV.parse(File.read("jobs.csv"), headers: true)
