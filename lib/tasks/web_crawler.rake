@@ -52,11 +52,7 @@ namespace :web_job_crawler do
         (0..info_table.count - 1).each do |info_part|
           info = info_table[info_part].text
           if info.include?("Nơi làm việc")
-            if City.find_by(name: info.gsub("/[\r\n]+/", "").partition(":").last.strip).nil?
-              job_workplace = get_city_id(info.gsub("/[\r\n]+/", "").partition(":").last.strip)
-            else
-              job_workplace = City.find_by(name: info.gsub("/[\r\n]+/", "").partition(":").last.strip).id
-            end
+            job_workplace = get_city_id(City.find_by(name: info.gsub("/[\r\n]+/", "").partition(":").last.strip))
           elsif info.include?("Lương")
             job_salary = info.gsub("/[\r\n]+/", "").partition(":").last.strip
           elsif info.include?("Kinh nghiệm")
@@ -174,7 +170,7 @@ def create_company(comp_name, comp_address, comp_desc = nil)
                    description: comp_desc])
 end
 
-def get_city_id(name, region="Việt Nam")
+def get_city_id(name, region = "Việt Nam")
   if City.exists?(name: name)
     City.find_by(name: name).id
   else
