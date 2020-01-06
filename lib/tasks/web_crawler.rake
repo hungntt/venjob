@@ -24,7 +24,7 @@ namespace :job do
     num_job = page.at("div[class='ais-stats'] h1[class='col-sm-10'] span").text.gsub(",", "").to_f
     num_pages = (num_job / 50).floor
 
-    (1..5).each do |num_page|
+    (1..num_pages).each do |num_page|
       page = Nokogiri::HTML.parse(open(URI.encode("https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-trang-#{num_page}-vi.html")))
       puts num_page
       (0..49).each do |k|
@@ -91,14 +91,14 @@ namespace :job do
           comp_id = get_comp_id(comp_name, city_id, comp_address, comp_desc)
           job_id = get_job_id(comp_id,
                               city_id,
-                              job_code,
                               job_name,
                               job_salary,
-                              job_deadline,
                               job_desc,
                               job_req,
-                              job_update,
                               job_position,
+                              job_update,
+                              job_deadline,
+                              job_code,
                               job_exp)
           job_industries.each do |job_industry|
             industry_id = get_industry_id(job_industry.strip)
@@ -113,7 +113,7 @@ namespace :job do
   desc "CSV job crawler"
 
   task csv_import: :environment do
-    Net::FTP.open('192.168.1.156', 'training', 'training')
+    Net::FTP.open("192.168.1.156", "training", "training")
     Zip::File.open("jobs.zip") do |zip_file|
       zip_file.each do |entry|
         entry.extract { true }
@@ -135,15 +135,11 @@ namespace :job do
       comp_id = get_comp_id(comp_name, city_id, comp_address, nil)
       job_id = get_job_id(comp_id,
                           city_id,
-                          nil,
                           job_name,
                           job_salary,
-                          nil,
                           job_desc,
                           job_req,
-                          nil,
-                          job_position,
-                          nil)
+                          job_position)
 
       industry_id = get_industry_id(job_industry)
       IndustryJob.find_or_create_by!(industry_id: industry_id, job_id: job_id)
@@ -157,19 +153,19 @@ def get_city_id(name, region = "Việt Nam")
   City.find_or_create_by!(name: name, region: region).id
 end
 
-def get_comp_id(comp_name, city_id, comp_address, comp_desc)
-  comp_desc ||= nil
+def get_comp_id(comp_name, city_id, comp_address, comp_desc = nil)
   company = Company.find_or_initialize_by(name: comp_name, city_id: city_id)
   company.update(address: comp_address, description: comp_desc)
   company.id
 end
 
-def get_job_id(company_id, city_id, job_code, job_name, job_salary, job_deadline, job_desc, job_req, job_update, job_position, job_exp)
-  job_code ||= nil
-  job_deadline ||= nil
-  job_update ||= nil
-  job_exp ||= nil
-  job = Job.find_or_initialize_by(company_id: company_id, city_id: city_id)
+def get_job_id(company_id, city_id, job_name, job_salary, job_desc, job_req, job_position, job_update = nil, job_deadline = nil, job_code = nil, job_exp = nil)
+  if job_deadline.nil?
+    job = Job.find_or_initialize_by(name: job_name, company_id: company_id, city_id: city_id)
+  else
+    job = Job.find_or_initialize_by(code: job_code)
+  end
+
   job.update(code: job_code,
              name: job_name,
              salary: job_salary,
