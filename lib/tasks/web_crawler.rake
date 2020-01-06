@@ -4,25 +4,13 @@ require 'zip'
 require 'csv'
 
 namespace :job do
-  desc "The crawler for City"
-
-  task web_city_import: :environment do
-    page = Nokogiri::HTML.parse(open('https://www.vnnic.vn/tenmien/hotro/danh-s%C3%A1ch-c%C3%A1c-t%E1%BB%89nh-th%C3%A0nh-v%C3%A0-th%C3%A0nh-ph%E1%BB%91?lang=en')); nil
-    cities = page.at("table").text.gsub("\n\t\t\t", ",").gsub("\n", ",").partition("Các tỉnh,Thành phố,").last.split(",")
-    city_list = []
-    cities.each do |city|
-      city_list << City.new(name: city, region: "Việt Nam")
-    end
-    City.import city_list
-  end
-
-
   desc "This is the crawler from CareerBuilder"
 
   task web_job_import: :environment do
     page = Nokogiri::HTML.parse(open('https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-vi.html'))
     num_job = page.at("div[class='ais-stats'] h1[class='col-sm-10'] span").text.gsub(",", "").to_f
     num_pages = (num_job / 50).floor
+
 
     (1..num_pages).each do |num_page|
       page = Nokogiri::HTML.parse(open(URI.encode("https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-trang-#{num_page}-vi.html")))
@@ -181,3 +169,4 @@ end
 def get_industry_id(name)
   Industry.find_or_create_by!(name: name).id
 end
+

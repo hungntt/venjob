@@ -1,0 +1,25 @@
+<div class="latest-job">
+  <div class="container-fullwidth pt-4">
+    <h2 class="text-center mt-0">Latest jobs</h2>
+    <hr class="divider my-4 bg-info">
+    <table class="table table-hover table-striped">
+      <thead class="bg-info text-white">
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Salary</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% (0..5).each do |job| %>
+      <tr>
+        <% job = Job.order("updated_at desc").offset(job).first%>
+        <td><%= job.name %></td>
+        <td><%= job.position%></td>
+        <td><%= job.salary %></td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
