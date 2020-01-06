@@ -14,6 +14,7 @@ namespace :job do
       puts city
       city_list << City.new(name: city, region: "Vietnam")
     end
+    city_list << City.new(name: "Bắc Cạn", region: "Vietnam")
     City.import city_list
   end
 
@@ -187,8 +188,4 @@ end
 
 def get_industry_id(name)
   Industry.find_or_create_by!(name: name).id
-end
-
-def numberic?
-  Float(self) != nil rescue false
 end
