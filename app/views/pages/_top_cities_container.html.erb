@@ -3,23 +3,21 @@
     <h2 class="text-center mt-0">Top cities</h2>
     <hr class="divider my-4 bg-info">
     <div class="row" id="info-box">
-      <% hash = Job.group(:city_id).order('count(*) desc').count('id') %>
-      <% array = hash.to_a %>
-      <% (0..10).each do |city| %>
+      <% @top_cities.each do |city, job_count| %>
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
-            <h3 class="h4 mb-2"><%= City.find_by_id(array[city][0]).name %></h3>
-            <p class="text-muted mb-0"><%= pluralize(array[city][1], "jobs") %></p>
+            <h3 class="h4 mb-2"><%= city.name %></h3>
+            <p class="text-muted mb-0"><%= pluralize(job_count, "jobs") %></p>
           </div>
         </div>
       <% end %>
       <div class="col-lg-3 col-md-6 text-center">
-      <%= link_to root_path do %>
+        <%= link_to root_path do %>
           <div class="mt-5">
             <h3 class="h4 mb-2 text-white see-more-text">See more</h3>
             <%= image_tag("see-more-btn-white.png", size: "30x30") %>
           </div>
-      <% end %>
+        <% end %>
       </div>
     </div>
   </div>

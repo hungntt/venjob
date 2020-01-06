@@ -11,14 +11,7 @@
       </tr>
       </thead>
       <tbody>
-      <% (0..5).each do |job| %>
-      <tr>
-        <% job = Job.order("updated_at desc").offset(job).first%>
-        <td><%= job.name %></td>
-        <td><%= job.position%></td>
-        <td><%= job.salary %></td>
-      </tr>
-      <% end %>
+        <%= render partial: "job", collection: @latest_jobs %>
       </tbody>
     </table>
   </div>
