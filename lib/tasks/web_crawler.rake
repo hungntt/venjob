@@ -135,10 +135,16 @@ namespace :job do
   end
 end
 
-def get_city_id(name, region = "Việt Nam")
+def get_city_id(name)
   name = JSON.parse(name)[0] rescue name
+  if City.find_by_name(name).nil?
+    region = Geocoder.search(name).first.country
+    puts name, region
+    City.create!(name: name, region: region).id
+  else
+    City.find_by_name(name).id
+  end
 
-  City.find_or_create_by!(name: name, region: region).id
 end
 
 def get_comp_id(comp_name, city_id, comp_address, comp_desc = nil)
@@ -170,3 +176,6 @@ def get_industry_id(name)
   Industry.find_or_create_by!(name: name).id
 end
 
+def numberic?
+  Float(self) != nil rescue false
+end
