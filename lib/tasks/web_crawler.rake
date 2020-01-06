@@ -11,11 +11,12 @@ namespace :job do
     cities = page.at("table").text.gsub("\n\t\t\t", ",").gsub("\n", ",").partition("Các tỉnh,Thành phố,").last.split(",")
     city_list = []
     cities.each do |city|
-      city_list << City.new(name: city, region: "Việt Nam")
+      puts city
+      city_list << City.new(name: city, region: "Vietnam")
     end
+    city_list << City.new(name: "Bắc Cạn", region: "Vietnam")
     City.import city_list
   end
-
 
   desc "This is the crawler from CareerBuilder"
 
@@ -23,6 +24,7 @@ namespace :job do
     page = Nokogiri::HTML.parse(open('https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-vi.html'))
     num_job = page.at("div[class='ais-stats'] h1[class='col-sm-10'] span").text.gsub(",", "").to_f
     num_pages = (num_job / 50).floor
+
 
     (1..num_pages).each do |num_page|
       page = Nokogiri::HTML.parse(open(URI.encode("https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-trang-#{num_page}-vi.html")))
@@ -147,10 +149,16 @@ namespace :job do
   end
 end
 
-def get_city_id(name, region = "Việt Nam")
+def get_city_id(name)
   name = JSON.parse(name)[0] rescue name
 
-  City.find_or_create_by!(name: name, region: region).id
+  city = City.find_by(name: name)
+
+  return city.id if city
+
+  region = Geocoder.search(name).first.country
+  puts name, region
+  City.create!(name: name, region: region).id
 end
 
 def get_comp_id(comp_name, city_id, comp_address, comp_desc = nil)
@@ -168,6 +176,8 @@ def get_job_id(company_id, city_id, job_name, job_salary, job_desc, job_req, job
 
   job.update(code: job_code,
              name: job_name,
+             company_id: company_id,
+             city_id: city_id,
              salary: job_salary,
              deadline: job_deadline,
              description: job_desc,

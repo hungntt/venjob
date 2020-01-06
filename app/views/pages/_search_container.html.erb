@@ -1,0 +1,22 @@
+<div class="search text-white text-center ">
+  <div class="overlay"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-9 mx-auto">
+        <h1 class="mb-5"><strong>Find the right course for your career</strong></h1>
+        <h3 class="mb-5">We have totally <%= pluralize(Job.count, "job") %> for you!</h3>
+      </div>
+      <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <div class="form-row has-search">
+          <div class="col-12 col-md-10 mb-md-0 no-padding">
+            <span class="fa fa-search form-control-feedback"></span>
+            <%= search_field_tag :search, params[:search], placeholder: "Search for a job...", class: "form-control rounded-left no-border-radius bg-light" %>
+          </div>
+          <div class="col-12 col-md-2 no-padding no-border-radius">
+            <%= button_tag "", class: "h-100 btn btn-block btn-lg btn-info fa fa-search rounded-right no-border-radius ", name: nil %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

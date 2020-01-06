@@ -58,7 +58,8 @@ ActiveRecord::Schema.define(version: 2020_01_02_084058) do
     t.integer "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["city_id", "company_id"], name: "index_jobs_on_city_id_and_company_id", unique: true
+    t.index ["city_id", "company_id", "name"], name: "index_jobs_on_city_id_and_company_id_and_name", unique: true
+    t.index ["code"], name: "index_jobs_on_code"
   end
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

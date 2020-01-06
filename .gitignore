@@ -34,3 +34,6 @@ yarn-debug.log*
 .idea/*
 public/uploads/
 jetbrains://rubymine/navigate/reference?project=venjob&path=~\.RubyMine2019.3\config\idea.properties
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
