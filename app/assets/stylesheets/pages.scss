@@ -1,0 +1,169 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+// Background Cover Mixin
+// Variables
+
+// Restated Bootstrap Variables
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+
+$primary: $blue !default;
+$secondary: $gray-600 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $gray-800 !default;
+
+@mixin background-cover {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+// Font Mixins
+@mixin body-font {
+  font-family: Varela Round, serif !important;
+}
+
+body {
+  @include body-font;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include body-font;
+  font-weight: 700;
+}
+
+.no-padding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.no-border-radius {
+  border-radius: 0 !important;
+}
+
+nav.navbar {
+  li {
+    a {
+      border-bottom: 2px solid rgba(0, 0, 0, 0);
+
+      &:hover {
+        border-bottom: 2px solid white;
+        transition: all 0.3s !important;
+      }
+    }
+  }
+}
+
+/* Search bar*/
+div.search {
+  position: relative;
+  background-color: $gray-800;
+  background-image: image-url("search-banner.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  @include background-cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+
+  .overlay {
+    position: absolute;
+    background-color: $gray-900;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+    h1 {
+      font-size: 3rem;
+    }
+  }
+}
+
+img.logo {
+  transition-delay: 1s;
+}
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+/* Latest jobs page */
+hr.divider {
+  max-width: 3.25rem;
+  border-width: .2rem;
+}
+
+div#info-box {
+  a {
+    text-decoration: none;
+  }
+
+  h3:before {
+    content:"|";
+    position: relative;
+    opacity: 0;
+    -webkit-transition: all 250ms !important;
+    transition: all 250ms !important;
+  }
+
+  h3:hover:before {
+
+    opacity: 1;
+    -webkit-transition: all 250ms !important;
+    transition: all 250ms !important;
+  }
+}
+
+
