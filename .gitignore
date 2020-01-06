@@ -33,3 +33,4 @@ yarn-debug.log*
 /spring/*.pid
 .idea/*
 public/uploads/
+jetbrains://rubymine/navigate/reference?project=venjob&path=~\.RubyMine2019.3\config\idea.properties

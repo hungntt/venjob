@@ -12,31 +12,29 @@
 
 ActiveRecord::Schema.define(version: 2020_01_02_084058) do
 
-  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "region"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "address"
-    t.string "phone_number"
-    t.string "website"
     t.text "description"
-    t.integer "size"
+    t.integer "city_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "industries", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "industries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "industry_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "industry_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "industry_id", null: false
     t.bigint "job_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -46,22 +44,24 @@ ActiveRecord::Schema.define(version: 2020_01_02_084058) do
     t.index ["job_id"], name: "index_industry_jobs_on_job_id"
   end
 
-  create_table "jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "code", null: false
+  create_table "jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "code"
     t.string "name", null: false
     t.string "salary"
     t.date "deadline"
     t.text "description"
+    t.text "requirement"
     t.date "last_updated"
     t.string "position"
     t.string "experience"
     t.integer "city_id"
+    t.integer "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["code"], name: "index_jobs_on_code", unique: true
+    t.index ["city_id", "company_id"], name: "index_jobs_on_city_id_and_company_id", unique: true
   end
 
-  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "sent_user_id"
     t.integer "received_user_id"
     t.bigint "job_id", null: false
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2020_01_02_084058) do
     t.index ["sent_user_id"], name: "index_requests_on_sent_user_id"
   end
 
-  create_table "saved_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "saved_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "job_id", null: false
     t.bigint "user_id", null: false
     t.string "type"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_01_02_084058) do
     t.index ["user_id"], name: "index_saved_jobs_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "fname", null: false
     t.string "lname", null: false

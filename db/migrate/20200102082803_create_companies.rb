@@ -3,10 +3,8 @@ class CreateCompanies < ActiveRecord::Migration[6.0]
     create_table :companies do |t|
       t.string :name, null: false
       t.string :address
-      t.string :phone_number
-      t.string :website
       t.text :description
-      t.integer :size
+      t.integer :city_id
 
       t.timestamps null: false
     end
