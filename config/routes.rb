@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get 'cities/index'
+  get 'cities/show'
   root "pages#home"
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :cities
 end
