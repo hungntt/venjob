@@ -22,7 +22,7 @@ namespace :job do
     num_job = page.at("div[class='ais-stats'] h1[class='col-sm-10'] span").text.gsub(",", "").to_f
     num_pages = (num_job / 50).floor
 
-    (1..2).each do |num_page|
+    (1..5).each do |num_page|
       page = Nokogiri::HTML.parse(open(URI.encode("https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-trang-#{num_page}-vi.html")))
       puts num_page
       (0..49).each do |k|
@@ -56,7 +56,7 @@ namespace :job do
           elsif info.include?("Hết hạn nộp")
             job_deadline = info.gsub("/[\r\n]+/", "").partition(":").last.strip
           elsif info.include?("Ngành nghề")
-            job_industries = info.gsub("/[\r\n]+/", "").partition(":").last.strip.split(", ")
+            job_industries = info.gsub("/[\r\n]+/", "").partition(":").last.split(",")
           end
         end
         # ====Description=======
@@ -71,11 +71,15 @@ namespace :job do
           end
         end
 
-        comp_address, comp_desc = ''
+        comp_name, comp_address = ""
         # Company full name
-        comp_name = job_page.at("div[class='tit_company']").text.strip
+        unless job_page.at("div[class='tit_company']").nil?
+          comp_name = job_page.at("div[class='tit_company']").text.strip
+        end
         # Company address
-        comp_address = job_page.xpath("//p[@class='TitleDetailNew']/label")[0].text.strip
+        unless job_page.xpath("//p[@class='TitleDetailNew']/label")[0].nil?
+          comp_address = job_page.xpath("//p[@class='TitleDetailNew']/label")[0].text.strip
+        end
         # Company description
         comp_desc = job_page.xpath("//span[@id='emp_more']/p").text.strip
 
@@ -94,8 +98,8 @@ namespace :job do
                               job_update,
                               job_position,
                               job_exp)
-          (0..job_industries.count).each do |job_industry|
-            industry_id = get_industry_id(job_industry)
+          job_industries.each do |job_industry|
+            industry_id = get_industry_id(job_industry.strip)
             IndustryJob.find_or_create_by!(industry_id: industry_id, job_id: job_id)
           end
         end
@@ -107,17 +111,17 @@ namespace :job do
   desc "CSV job crawler"
 
   task csv_import: :environment do
-    #Net::FTP.open('192.168.1.156', 'training', 'training')
-    #Zip::File.open("jobs.zip") do |zip_file|
-    #  zip_file.each do |entry|
-    #    entry.extract { true }
-    #  end
-    #end
+    Net::FTP.open('192.168.1.156', 'training', 'training')
+    Zip::File.open("jobs.zip") do |zip_file|
+      zip_file.each do |entry|
+        entry.extract { true }
+      end
+    end
     CSV.foreach("jobs.csv", headers: true).with_index do |row, i|
       puts i
       job_industry = row["category"]
-      comp_address = row["company address"].strip
-      comp_name = row["company name"].strip
+      comp_address = row["company address"]
+      comp_name = row["company name"]
       job_position = row["level"]
       job_desc = row["description"]
       job_name = row["name"]
@@ -147,6 +151,7 @@ end
 
 def get_city_id(name, region = "Việt Nam")
   name = JSON.parse(name)[0] rescue name
+
   City.find_or_create_by!(name: name, region: region).id
 end
 
