@@ -2,7 +2,7 @@
   <div class="container-fullwidth py-5 bg-light text-dark">
     <h2 class="text-center mt-0">Top industries</h2>
     <hr class="divider my-4 bg-info">
-    <div class="row">
+    <div class="row" id="info-box">
       <% hash = IndustryJob.group(:industry_id).order('count(*) desc').count('id') %>
       <% array = hash.to_a %>
       <% (0..10).each do |industry| %>
