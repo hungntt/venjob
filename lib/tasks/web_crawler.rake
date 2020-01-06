@@ -151,14 +151,14 @@ end
 
 def get_city_id(name)
   name = JSON.parse(name)[0] rescue name
-  if City.find_by_name(name).nil?
-    region = Geocoder.search(name).first.country
-    puts name, region
-    City.create!(name: name, region: region).id
-  else
-    City.find_by_name(name).id
-  end
 
+  city = City.find_by(name: name)
+
+  return city.id if city
+
+  region = Geocoder.search(name).first.country
+  puts name, region
+  City.create!(name: name, region: region).id
 end
 
 def get_comp_id(comp_name, city_id, comp_address, comp_desc = nil)
@@ -176,6 +176,8 @@ def get_job_id(company_id, city_id, job_name, job_salary, job_desc, job_req, job
 
   job.update(code: job_code,
              name: job_name,
+             company_id: company_id,
+             city_id: city_id,
              salary: job_salary,
              deadline: job_deadline,
              description: job_desc,
