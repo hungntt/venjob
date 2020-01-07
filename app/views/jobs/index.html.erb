@@ -3,10 +3,10 @@
 </div>
 <div class="no-padding custom_pagination d-flex align-items-end flex-column bg-light">
   <div class="page_info p-2">
-    <%= page_entries_info %>
+    <%= page_entries_info @jobs %>
   </div>
   <div class="p-2">
-    <%= will_paginate %>
+    <%= paginate @jobs %>
   </div>
 </div>
 <table class="table table-hover table-striped table-light no-padding">
