@@ -5,8 +5,26 @@
         <div class="col-12 col-md-11 mb-md-0">
           <h4><%= jobs.name %></h4>
           <h6><i class="fa fa-suitcase"></i> <%= jobs.company.name %></h6>
-          <h6><i class="fa fa-map-pin"></i> <%= jobs.city.name %> <i class="fa fa-dollar pl-5"></i> <%= jobs.salary %></h6>
-          <h6><i class="fa fa-hand-o-right"></i> <%= truncate(jobs.description, length: 250) %></h6>
+          <h6><i class="fa fa-map-pin"></i> <%= jobs.city.name %> <i class="fa fa-dollar pl-5"></i> <%= jobs.salary %>
+          </h6>
+          <h6>
+            <i class="fa fa-hand-o-right"></i>
+            <div>
+              <% if jobs.description.length > 250 %>
+                <%= truncate(simple_format(jobs.description), escape: false, length: 250) %>
+                <%= link_to '...Read more', '', class: "read-more-#{jobs.id}" %>
+                <script type="text/javascript">
+                    $('.read-more-<%= jobs.id %>').on('click', function (e) {
+                        e.preventDefault();
+                        $(this).parent().html('<%= escape_javascript simple_format(jobs.description) %>')
+                    })
+                </script>
+              <% else %>
+                <%= jobs.description %>
+              <% end %>
+            </div>
+          </h6>
+
         </div>
         <div class="col-12 col-md-1 mb-md-0 no-padding text-center">
           <i class="fa fa-heart-o fa-2x"></i>
@@ -15,3 +33,22 @@
     </div>
   </td>
 </tr>
+
+<script type="text/javascript">
+    $('[class^="read-more"]').click(function (element) {
+        element.preventDefault()
+        $(`.truncated-paragraph-${elId($(this))}`).hide()
+        $(`.normal-paragraph-${elId($(this))}`).show()
+    })
+
+    $('[class^="read-less"]').click(function (element) {
+        element.preventDefault()
+        $(`.normal-paragraph-${elId($(this))}`).hide()
+        $(`.truncated-paragraph-${elId($(this))}`).show()
+    })
+
+    function elId(element) {
+        let elClassName = element.attr('class').split('-')
+        return elClassName[elClassName.length - 1]
+    }
+</script>
