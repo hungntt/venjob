@@ -4,7 +4,12 @@
   <%= render "layouts/head" %>
 </head>
 <body>
-<%= render "layouts/header" %>
+<% if current_page? root_path %>
+  <%= render "layouts/header" %>
+<% else %>
+  <%= render "layouts/header_container" %>
+<% end %>
+
 <div class="container-fullwidth">
   <% flash.each do |message_type, message| %>
     <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>

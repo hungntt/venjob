@@ -1,51 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-  <div class="container-fluid">
-    <%= link_to image_tag("logo-white.png", size: "150x80"), root_path, class: "navbar-brand js-scroll-trigger logo" %>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto my-2 my-lg-0">
-        <% if user_signed_in? %>
-          <li><%= link_to "Favorite", favorite_path %></li>
-          <li><%= link_to "History", history_path %></li>
-          <li><%= link_to "Users", users_path %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Account <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-              </li>
-            </ul>
-          </li>
-        <% else %>
-          <li class="nav-item pl-3"><%= link_to "Sign up", new_user_registration_path, class: "nav-link js-scroll-trigger text-white pb-3" %></li>
-          <li class="nav-item pl-3"><%= link_to "Log in", new_user_session_path, class: "nav-link js-scroll-trigger text-white pb-3" %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
+<nav class="navbar navbar-expand-lg fixed-top pt-2" id="main_nav">
+  <%= render "layouts/navbar-inside" %>
 </nav>
 
 <script type="text/javascript">
     $(document).ready(function () {
-
         $(window).scroll(function () {
-
             let height = $('.search').height();
             let scrollTop = $(window).scrollTop();
-
-            if (scrollTop >= 30) {
-                $('.navbar').fadeOut()
+            if (scrollTop >= 5) {
+                $('#main_nav').fadeOut("fast");
             } else {
-                $('.navbar').fadeIn();
+                $('#main_nav').fadeIn("fast");
             }
-
         });
     });
 </script>

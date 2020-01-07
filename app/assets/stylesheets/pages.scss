@@ -145,13 +145,25 @@ hr.divider {
   border-width: .2rem;
 }
 
+/* Top cities, industries container */
 div#info-box {
   a {
     text-decoration: none;
+    color: inherit;
   }
 
   h3:before {
-    content:"|";
+    font-family: "FontAwesome";
+    content: "\f0da   ";
+    position: relative;
+    opacity: 0;
+    -webkit-transition: all 250ms !important;
+    transition: all 250ms !important;
+  }
+
+  h3:after {
+    font-family: "FontAwesome";
+    content: " \f0d9";
     position: relative;
     opacity: 0;
     -webkit-transition: all 250ms !important;
@@ -159,7 +171,12 @@ div#info-box {
   }
 
   h3:hover:before {
+    opacity: 1;
+    -webkit-transition: all 250ms !important;
+    transition: all 250ms !important;
+  }
 
+  h3:hover:after {
     opacity: 1;
     -webkit-transition: all 250ms !important;
     transition: all 250ms !important;
