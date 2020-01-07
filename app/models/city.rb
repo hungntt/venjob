@@ -3,7 +3,9 @@ class City < ApplicationRecord
   has_many :companies
   has_many :jobs
 
-  before_save :format_slug
+  validates :slug, presence: true, uniqueness: { case_sensitive: true }
+
+  before_validation :format_slug
   friendly_id :name, use: %i[slugged finders]
 
   private

@@ -159,7 +159,7 @@ def get_city_id(name)
 
   region = Geocoder.search(name).first.country
   puts name, region
-  City.create!(name: name, region: region).id
+  City.create!(name: name, region: region).id rescue City.find_by(slug: name.to_url).id
 end
 
 def get_comp_id(comp_name, city_id, comp_address, comp_desc = nil)
