@@ -4,12 +4,12 @@
     <hr class="divider my-4 bg-info">
     <div class="row" id="info-box">
       <% @industries_job_list.each do |name, job_count| %>
-              <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5">
-                  <h3 class="h4 mb-2 see-more-text"><%= name %></h3>
-                  <p class="text-muted mb-0"><%= pluralize(job_count, "job") %></p>
-                </div>
-              </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="mt-5">
+            <h3 class="h4 mb-2 see-more-text"><%= name %></h3>
+            <p class="text-muted mb-0"><%= pluralize(job_count, "job") %></p>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>

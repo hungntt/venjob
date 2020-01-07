@@ -5,10 +5,10 @@
       <hr class="divider my-4 bg-info">
       <div class="row" id="info-box">
         <% list = get_countries_job_list(country) %>
-        <% list.each do |name, count| %>
+        <% list.each do |city_name, count| %>
           <div class="col-lg-3 col-md-6 text-center">
             <div class="mt-5">
-              <h3 class="h4 mb-2 see-more-text"><%= name %></h3>
+              <h3 class="h4 mb-2 see-more-text"><%= city_name %></h3>
               <p class="text-muted mb-0"><%= pluralize(count, "job") %></p>
             </div>
           </div>
