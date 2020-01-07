@@ -9,22 +9,19 @@
           </h6>
           <h6>
             <i class="fa fa-hand-o-right"></i>
-            <div>
-              <% if jobs.description.length > 250 %>
-                <%= truncate(simple_format(jobs.description), escape: false, length: 250) %>
-                <%= link_to '...Read more', '', class: "read-more-#{jobs.id}" %>
-                <script type="text/javascript">
-                    $('.read-more-<%= jobs.id %>').on('click', function (e) {
-                        e.preventDefault();
-                        $(this).parent().html('<%= escape_javascript simple_format(jobs.description) %>')
-                    })
-                </script>
-              <% else %>
-                <%= jobs.description %>
-              <% end %>
-            </div>
+            <% if jobs.description.length > 250 %>
+              <%= truncate(simple_format(jobs.description), escape: false, length: 250) %>
+              <%= link_to '...Read more', '', class: "read-more-#{jobs.id}" %>
+              <script type="text/javascript">
+                  $('.read-more-<%= jobs.id %>').on('click', function (e) {
+                      e.preventDefault();
+                      $(this).parent().html('<%= escape_javascript simple_format(jobs.description) %>')
+                  })
+              </script>
+            <% else %>
+              <%= jobs.description %>
+            <% end %>
           </h6>
-
         </div>
         <div class="col-12 col-md-1 mb-md-0 no-padding text-center">
           <i class="fa fa-heart-o fa-2x"></i>
