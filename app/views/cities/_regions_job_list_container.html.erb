@@ -1,0 +1,19 @@
+<% @countries_job_list.each do |country, job_count| %>
+  <div class="countries-job-list" id="<%= country %>">
+    <div class="container-fullwidth py-5 bg-light text-dark">
+      <h2 class="text-center mt-0"><%= country.upcase %> <small>(<%= job_count %>)</small></h2>
+      <hr class="divider my-4 bg-info">
+      <div class="row" id="info-box">
+        <% list = get_countries_job_list(country) %>
+        <% list.each do |name, count| %>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="mt-5">
+              <h3 class="h4 mb-2 see-more-text"><%= name %></h3>
+              <p class="text-muted mb-0"><%= pluralize(count, "job") %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
