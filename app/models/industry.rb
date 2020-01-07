@@ -3,7 +3,9 @@ class Industry < ApplicationRecord
   has_many :industry_jobs
   has_many :jobs, through: :industry_jobs
 
-  before_save :format_slug
+  validates :slug, presence: true, uniqueness: { case_sensitive: true }
+
+  before_validation :format_slug
   friendly_id :name, use: %i[slugged finders]
 
   private

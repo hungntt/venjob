@@ -190,5 +190,6 @@ def get_job_id(company_id, city_id, job_name, job_salary, job_desc, job_req, job
 end
 
 def get_industry_id(name)
-  Industry.find_or_create_by!(name: name).id
+  industry = Industry.find_or_create_by!(name: name) rescue Industry.find_by(slug: name.to_url)
+  industry.id
 end
