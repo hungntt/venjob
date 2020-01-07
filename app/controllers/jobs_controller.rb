@@ -15,7 +15,7 @@ class JobsController < ApplicationController
       @name = "JOB LIST"
       @jobs = Job.all
     end
-    @jobs = @jobs.order(updated_at: :desc).page params[:page]
+    @jobs = @jobs.order(updated_at: :desc).page(params[:page]).per(Settings.jobs.limit)
   end
 
   def show
