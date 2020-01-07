@@ -1,0 +1,18 @@
+<div class="no-padding custom_pagination d-flex align-items-end flex-column bg-light">
+  <div class="page_info p-2">
+    <%= page_entries_info %>
+  </div>
+  <div class="p-2">
+    <%= will_paginate %>
+  </div>
+</div>
+<table class="table table-hover table-striped table-light no-padding">
+  <tbody>
+  <%= render partial: "jobs", collection: @jobs %>
+  </tbody>
+</table>
+
+<div class="container-fullwidth">
+
+</div>
+

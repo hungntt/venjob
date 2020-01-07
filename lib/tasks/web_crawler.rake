@@ -39,7 +39,7 @@ namespace :job do
 
         #======Title========
         # Job name
-        job_name = job_page.at("div[class='top-job-info'] h1").text
+        job_name = job_page.at("div[class='top-job-info'] h1").text.strip
         # Last update
         job_update = job_page.at("div[class='datepost'] span").text
 
