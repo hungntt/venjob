@@ -16,6 +16,7 @@ namespace :job do
     end
     city_list << City.new(name: "Bắc Cạn", region: "Vietnam")
     City.import city_list
+    City.all.map(&:save!)
   end
 
   desc "This is the crawler from CareerBuilder"
