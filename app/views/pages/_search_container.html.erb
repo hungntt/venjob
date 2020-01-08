@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-xl-9 mx-auto">
         <h1 class="mb-5"><strong>Find the right course for your career</strong></h1>
-        <h3 class="mb-5">We have totally <%= pluralize(Job.count, "job") %> for you!</h3>
+        <h3 class="mb-5" id="count">We have totally <%= pluralize(Job.count, "job") %> for you!</h3>
       </div>
       <%= render "shared/search_bar" %>
     </div>

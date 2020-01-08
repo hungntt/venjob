@@ -4,6 +4,4 @@ class Job < ApplicationRecord
 
   has_many :industry_jobs
   has_many :saved_jobs
-
-
 end

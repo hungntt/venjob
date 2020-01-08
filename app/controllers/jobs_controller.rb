@@ -1,8 +1,5 @@
 class JobsController < ApplicationController
-
-
   def index
-
     if params[:city_id].present?
       city = City.friendly.find(params[:city_id])
       @name = city.name
@@ -19,5 +16,12 @@ class JobsController < ApplicationController
   end
 
   def show
+    @job = Job.find(params[:id])
+    @city_name = City.friendly.find(@job.city_id).name
+    industries = IndustryJob.where(job_id: @job.id)
+    @industries_name = []
+    industries.each do |industry|
+      @industries_name.append(Industry.find(industry.industry_id).name)
+    end
   end
 end
