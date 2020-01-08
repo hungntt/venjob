@@ -1,2 +1,39 @@
-<h1>Jobs#show</h1>
-<p>Find me in app/views/jobs/show.html.erb</p>
+<div class="container-fullwidth bg-dark text-light p-3">
+  <div class="" id="top-route">
+    <%= link_to root_path do %>
+      <i class="fa fa-home"></i>
+    <% end %>   >
+    <%= link_to city_jobs_path(@job.city_name.to_url) do %>
+    <%= @job.city_name %>
+    <% end %> >
+    <% industry_name_list = @job.industry_name_list %>
+    <% industry_name_list.each_with_index do |name, index| %>
+      <%= link_to industry_jobs_path(name.to_url) do %>
+        <%= name %>
+      <% end %>
+      <%= "|" if index != industry_name_list.count - 1 %>
+    <% end %>
+    >
+    <%= @job.name %>
+  </div>
+</div>
+<div class="container px-5">
+  <div class="row my-3 p-3">
+    <div class="col-12 col-md-10">
+      <div>
+        <h2><%= @job.name %></h2>
+        <h6><i class="fa fa-suitcase"></i> <%= @job.company_name %></h6>
+        <h6><i class="fa fa-map-pin"></i> <%= @job.city_name %> <i class="fa fa-dollar pl-5"></i> <%= @job.salary %>
+        </h6>
+        <h6>
+          <i class="fa fa-hand-o-right"></i>
+          <%= simple_format(@job.description) %>
+        </h6>
+      </div>
+    </div>
+    <div class="col-12 col-md-2 scroll-target">
+      <button class="btn btn-block btn-lg btn-outline-info">Apply <i class="fa fa-send"></i></button>
+      <button class="btn btn-block btn-lg btn-outline-danger">Save <i class="fa fa-heart"></i></button>
+    </div>
+  </div>
+</div>

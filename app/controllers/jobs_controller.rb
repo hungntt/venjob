@@ -1,8 +1,5 @@
 class JobsController < ApplicationController
-
-
   def index
-
     if params[:city_id].present?
       city = City.friendly.find(params[:city_id])
       @name = city.name
@@ -19,5 +16,6 @@ class JobsController < ApplicationController
   end
 
   def show
+    @job = Job.find(params[:id])
   end
 end

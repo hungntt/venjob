@@ -48,9 +48,25 @@ $dark: $gray-800 !default;
 @mixin body-font {
   font-family: Varela Round, serif !important;
 }
+html {
+  position: relative;
+  min-height: 100%;
 
+}
 body {
+  height: 100%;
+  margin: 0 auto -155px;
   @include body-font;
+
+}
+.footer  {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+}
+.push      {
+  height: 100px;
 }
 
 h1,
@@ -232,5 +248,24 @@ div#info-box {
     b {
       padding: 0 0.25em;
     }
+  }
+}
+
+div#job-div {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+div#top-route {
+  a {
+    color: inherit;
+  }
+}
+
+td#job-name {
+  a {
+    color: inherit;
   }
 }

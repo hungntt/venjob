@@ -1,5 +1,10 @@
 <tr>
-  <td><%= job.name %></td>
+  <td id="job-name">
+    <%= link_to job_path(job.id) do %>
+      <i class="fa fa-exclamation fa-pulse text-danger"></i>
+      <text class="text-black pl-2"><%= job.name %></text>
+    <% end %></td>
   <td><%= job.position %></td>
   <td><%= job.salary %></td>
 </tr>
+
