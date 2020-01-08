@@ -2,8 +2,9 @@
   <div class="" id="top-route">
     <%= link_to root_path do %>
       <i class="fa fa-home"></i>
-    <% end %>
+    <% end %>   >
     <%= link_to city_jobs_path(@job.city_name.to_url) do %>
+    <%= @job.city_name %>
     <% end %> >
     <% industry_name_list = @job.industry_name_list %>
     <% industry_name_list.each_with_index do |name, index| %>
