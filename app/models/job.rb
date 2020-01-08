@@ -6,9 +6,8 @@ class Job < ApplicationRecord
   has_many :industries, through: :industry_jobs
   has_many :saved_jobs
 
-  def city_name
-    city.name
-  end
+  delegate :name, to: :city, prefix: true
+  delegate :name, to: :company, prefix: true
 
   def industry_name_list
     industries.map(&:name)
