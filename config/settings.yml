@@ -2,3 +2,6 @@ home_page:
   job_list_limit: 10
   city_list_limit: 11
   industry_list_limit: 11
+
+jobs:
+  limit: 20

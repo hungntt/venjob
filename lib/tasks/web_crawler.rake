@@ -16,6 +16,7 @@ namespace :job do
     end
     city_list << City.new(name: "Bắc Cạn", region: "Vietnam")
     City.import city_list
+    City.all.map(&:save!)
   end
 
   desc "This is the crawler from CareerBuilder"
@@ -39,7 +40,7 @@ namespace :job do
 
         #======Title========
         # Job name
-        job_name = job_page.at("div[class='top-job-info'] h1").text
+        job_name = job_page.at("div[class='top-job-info'] h1").text.strip
         # Last update
         job_update = job_page.at("div[class='datepost'] span").text
 
@@ -158,7 +159,7 @@ def get_city_id(name)
 
   region = Geocoder.search(name).first.country
   puts name, region
-  City.create!(name: name, region: region).id
+  City.create!(name: name, region: region).id rescue City.find_by(slug: name.to_url).id
 end
 
 def get_comp_id(comp_name, city_id, comp_address, comp_desc = nil)
@@ -189,5 +190,6 @@ def get_job_id(company_id, city_id, job_name, job_salary, job_desc, job_req, job
 end
 
 def get_industry_id(name)
-  Industry.find_or_create_by!(name: name).id
+  industry = Industry.find_or_create_by!(name: name) rescue Industry.find_by(slug: name.to_url)
+  industry.id
 end

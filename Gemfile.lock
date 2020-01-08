@@ -75,6 +75,7 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
+    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     config (2.1.0)
       deep_merge (~> 1.2, >= 1.2.1)
@@ -128,6 +129,8 @@ GEM
     erubi (1.9.0)
     ffi (1.11.3)
     ffi (1.11.3-x64-mingw32)
+    friendly_id (5.2.5)
+      activerecord (>= 4.0.0)
     geocoder (1.5.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -135,6 +138,18 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
+    kaminari (1.1.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.1.1)
+      kaminari-activerecord (= 1.1.1)
+      kaminari-core (= 1.1.1)
+    kaminari-actionview (1.1.1)
+      actionview
+      kaminari-core (= 1.1.1)
+    kaminari-activerecord (1.1.1)
+      activerecord
+      kaminari-core (= 1.1.1)
+    kaminari-core (1.1.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -161,6 +176,9 @@ GEM
     nokogiri (1.10.7-x64-mingw32)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (4.0.2)
     puma (4.3.1)
       nio4r (~> 2.0)
@@ -231,6 +249,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stringex (2.8.5)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -275,11 +294,14 @@ DEPENDENCIES
   config
   csv
   devise
+  friendly_id (~> 5.2.4)
   geocoder
   jbuilder (~> 2.7)
+  kaminari
   listen (>= 3.0.5, < 3.2)
   mysql2 (>= 0.4.4)
   nokogiri
+  pry
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
   rubyzip
@@ -287,6 +309,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  stringex
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)

@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg fixed-top pt-2" id="main_nav">
+  <%= render "layouts/navbar-inside" %>
+</nav>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            let height = $('.search').height();
+            let scrollTop = $(window).scrollTop();
+            if (scrollTop >= 5) {
+                $('#main_nav').fadeOut("fast");
+            } else {
+                $('#main_nav').fadeIn("fast");
+            }
+        });
+    });
+</script>

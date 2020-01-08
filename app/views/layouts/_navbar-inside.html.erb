@@ -1,5 +1,8 @@
 <div class="container-fluid" id="navbar-container">
   <%= link_to image_tag("logo-white.png", size: "140x75"), root_path, class: "navbar-brand js-scroll-trigger logo" %>
+  <% unless current_page? root_url %>
+    <%= render "shared/search_bar" %>
+  <% end %>
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,8 +26,8 @@
           </ul>
         </li>
       <% else %>
-        <li class="nav-item pl-3"><%= link_to "Sign up", new_user_registration_path, class: "nav-link js-scroll-trigger text-white pb-3" %></li>
-        <li class="nav-item pl-3"><%= link_to "Log in", new_user_session_path, class: "nav-link js-scroll-trigger text-white pb-3" %></li>
+        <li class="nav-item pl-3"><%= link_to "Sign up", new_user_registration_path, class: "nav-link text-white pb-3" %></li>
+        <li class="nav-item pl-3"><%= link_to "Log in", new_user_session_path, class: "nav-link text-white pb-3" %></li>
       <% end %>
     </ul>
   </div>
