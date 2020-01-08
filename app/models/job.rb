@@ -9,4 +9,8 @@ class Job < ApplicationRecord
   def city_name
     city.name
   end
+
+  def industry_name_list
+    industries.map(&:name)
+  end
 end

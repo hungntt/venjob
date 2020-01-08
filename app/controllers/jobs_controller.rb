@@ -18,6 +18,6 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @city_name = @job.city_name
-    @industries_name = @job.industries.map(&:name)
+    @industries_name = @job.industry_name_list
   end
 end
