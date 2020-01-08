@@ -1,4 +1,4 @@
-<div class="container-fullwidth bg-dark text-light p-3">
+<div class="container-fullwidth bg-info text-light p-3">
   <div class="" id="top-route">
     <%= link_to root_path do %>
       <i class="fa fa-home"></i>
@@ -18,7 +18,16 @@
 <div class="container px-5">
   <div class="row my-3 p-3">
     <div class="col-12 col-md-10">
-      <%= render "job_detail" %>
+      <div>
+        <h2><%= @job.name %></h2>
+        <h6><i class="fa fa-suitcase"></i> <%= @job.company.name %></h6>
+        <h6><i class="fa fa-map-pin"></i> <%= @city_name %> <i class="fa fa-dollar pl-5"></i> <%= @job.salary %>
+        </h6>
+        <h6>
+          <i class="fa fa-hand-o-right"></i>
+          <%= simple_format(@job.description) %>
+        </h6>
+      </div>
     </div>
     <div class="col-12 col-md-2 scroll-target">
       <button class="btn btn-block btn-lg btn-outline-info">Apply <i class="fa fa-send"></i></button>

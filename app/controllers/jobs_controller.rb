@@ -17,11 +17,7 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
-    @city_name = City.friendly.find(@job.city_id).name
-    industries = IndustryJob.where(job_id: @job.id)
-    @industries_name = []
-    industries.each do |industry|
-      @industries_name.append(Industry.find(industry.industry_id).name)
-    end
+    @city_name = @job.city_name
+    @industries_name = @job.industries.map(&:name)
   end
 end
