@@ -3,13 +3,14 @@
     <%= link_to root_path do %>
       <i class="fa fa-home"></i>
     <% end %>
-    <%= link_to city_jobs_path(@city_name.to_url) do %>
+    <%= link_to city_jobs_path(@job.city_name.to_url) do %>
     <% end %> >
-    <% @industries_name.each_with_index do |name, index| %>
+    <% industry_name_list = @job.industry_name_list %>
+    <% industry_name_list.each_with_index do |name, index| %>
       <%= link_to industry_jobs_path(name.to_url) do %>
         <%= name %>
       <% end %>
-      <%= "|" if index != @industries_name.count - 1 %>
+      <%= "|" if index != industry_name_list.count - 1 %>
     <% end %>
     >
     <%= @job.name %>
@@ -21,7 +22,7 @@
       <div>
         <h2><%= @job.name %></h2>
         <h6><i class="fa fa-suitcase"></i> <%= @job.company_name %></h6>
-        <h6><i class="fa fa-map-pin"></i> <%= @city_name %> <i class="fa fa-dollar pl-5"></i> <%= @job.salary %>
+        <h6><i class="fa fa-map-pin"></i> <%= @job.city_name %> <i class="fa fa-dollar pl-5"></i> <%= @job.salary %>
         </h6>
         <h6>
           <i class="fa fa-hand-o-right"></i>
