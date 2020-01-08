@@ -23,7 +23,14 @@
       <div>
         <h2><%= @job.name %></h2>
         <h6><i class="fa fa-suitcase"></i> <%= @job.company_name %></h6>
-        <h6><i class="fa fa-map-pin"></i> <%= @job.city_name %> <i class="fa fa-dollar pl-5"></i> <%= @job.salary %>
+        <h6 class="text-dark">
+          <%= link_to city_jobs_path(@job.city_name.to_url) do %>
+            <i class="fa fa-map-pin"></i>
+            <%= @job.city_name %>
+          <% end %>
+          <i class="fa fa-dollar pl-5"></i>
+          <%= @job.salary %>
+        </h6>
         </h6>
         <h6>
           <i class="fa fa-hand-o-right"></i>

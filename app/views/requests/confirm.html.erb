@@ -1,0 +1,69 @@
+<div class="container-full bg-light p-5 form-container">
+  <div class="text-center text-light p-5">
+    <h1>CONFIRMATION</h1>
+  </div>
+  <div class="container bg-light border border-dark rounded-lg p-5">
+    <div class="row align-center text-center">
+      <div class="col bg-info py-2 border rounded-left rounded-pill" id="step-container">
+        <span class="fa-stack">
+          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <strong class="fa-stack-1x text-info">1</strong></span>
+        <strong class="text-light">New</strong>
+      </div>
+      <div class="col bg-info py-2 border rounded-left rounded-pill" id="step-container">
+        <span class="fa-stack">
+          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <strong class="fa-stack-1x text-info">2</strong></span>
+        <strong class="text-light">Confirm</strong>
+      </div>
+      <div class="col bg-light py-2 border-top border-bottom" id="step-container">
+        <span class="fa-stack">
+          <i class="fa fa-circle fa-stack-2x" id="step-circle-disabled"></i>
+          <strong class="fa-stack-1x text-secondary">3</strong></span>
+        <strong class="text-secondary">Finish</strong>
+      </div>
+    </div>
+    <%= form_for :requests, html: {class: "form-horizontal center"} do |f| %>
+      <div class="form-row">
+        <div class="col no-padding pr-2">
+          <%= f.label :first_name, class: "label" %>
+          <%= f.text_field :fname, class: "form-control input" %>
+        </div>
+        <div class="col no-padding">
+          <%= f.label :last_name, class: "label" %>
+          <%= f.text_field :lname, class: "form-control input" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col no-padding">
+          <%= f.label :email, class: "label" %>
+          <%= f.email_field :email, class: "form-control input" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <%= f.label :cv, "Upload CV", class: "label" %>
+        <div class="custom-file mb-5">
+          <%= f.label "Choose file...", class: "custom-file-label" %>
+          <%= f.file_field :cv, class: "custom-file-input" %>
+        </div>
+      </div>
+      <div class="row align-center">
+        <div class="col-4 col-md-10 text-right">
+          <%= submit_tag("Edit", {name: "reset", id: "reset_button", type: "reset", class: "btn btn-secondary py-2 px-3"}) %>
+        </div>
+        <div class="col-4 col-md-2 text-left">
+          <%= f.submit "Submit", class: "btn btn-info px-5 py-2" %>
+        </div>
+      </div>
+      </div>
+    <% end %>
+    </div>
+</div>
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>

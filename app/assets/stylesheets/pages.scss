@@ -48,24 +48,28 @@ $dark: $gray-800 !default;
 @mixin body-font {
   font-family: Varela Round, serif !important;
 }
+
 html {
   position: relative;
   min-height: 100%;
 
 }
+
 body {
   height: 100%;
   margin: 0 auto -155px;
   @include body-font;
 
 }
-.footer  {
+
+.footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 100px;
 }
-.push      {
+
+.push {
   height: 100px;
 }
 
@@ -77,6 +81,10 @@ h5,
 h6 {
   @include body-font;
   font-weight: 700;
+
+  a {
+    color: inherit;
+  }
 }
 
 .no-padding {
@@ -268,4 +276,20 @@ td#job-name {
   a {
     color: inherit;
   }
+}
+
+.form-row {
+  padding-top: 20px !important;
+}
+
+.custom-file-input {
+  cursor: pointer !important;
+}
+
+.form-container {
+  background: linear-gradient($dark 50%, $light 50%);
+}
+
+#step-circle-disabled {
+    color: $gray-300;
 }

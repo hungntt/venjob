@@ -1,0 +1,33 @@
+<div class="container-full bg-light p-5 form-container">
+  <div class="text-center text-light p-5">
+    <h1>FINISH</h1>
+  </div>
+  <div class="container bg-light border border-dark rounded-lg p-5">
+    <div class="row align-center text-center">
+      <div class="col bg-info py-2 border rounded-left rounded-pill" id="step-container">
+        <span class="fa-stack">
+          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <strong class="fa-stack-1x text-info">1</strong></span>
+        <strong class="text-light">New</strong>
+      </div>
+      <div class="col bg-info py-2 border rounded-left rounded-pill" id="step-container">
+        <span class="fa-stack">
+          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <strong class="fa-stack-1x text-info">2</strong></span>
+        <strong class="text-light">Confirm</strong>
+      </div>
+      <div class="col bg-info py-2 border rounded-left rounded-pill" id="step-container">
+        <span class="fa-stack">
+          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <strong class="fa-stack-1x text-info">3</strong></span>
+        <strong class="text-light">Finish!</strong>
+      </div>
+    </div>
+    <div class="text-center">
+      <div class="my-5">
+        <h2>THANK YOU FOR APPLYING</h2></div>
+        <h5>Please check your email to confirm your application.</h5>
+      <%= button_to "Back to homepage", root_path, class: "btn btn-outline-info px-5 py-2 my-4" %>
+    </div>
+  </div>
+</div>
