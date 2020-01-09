@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="modal-body">
+    <div style="text-align: center;">
+      <%= image_tag "https://3.bp.blogspot.com/-NbuCiSzSexA/WafsJZMb9fI/AAAAAAAAhiM/DnhbVyUGSi47tIUZTyh4CWMa7rw_iGnLgCLcBGAs/s1600/1408830065792.jpg", class: "rounded-circle", width: "140", height: "140" %>
+    </div>
+    <hr>
+    <div style="text-align: center;">
+      <%= form_for (@user), url: user_path(@user), method: :patch, html: {class: "form-horizontal center"} do |f| %>
+        <%= f.label :fname, "First name", class: "pt-3" %>
+        <%= f.text_field :fname, class: "form-control" %>
+
+        <%= f.label :lname, "Last name", class: "pt-3"  %>
+        <%= f.text_field :lname, class: "form-control" %>
+
+        <%= f.label :email, "Email", class: "pt-3"  %>
+        <%= f.email_field :email, class: "form-control" %>
+
+
+        <%= f.label :resume, "Upload CV", class: "pt-3"  %>
+        <div class="custom-file">
+          <%= f.label :resume, "Choose file", class: "custom-file-label", for: "customFile" %>
+          <%= f.file_field :resume, class: "custom-file-input" %>
+        </div>
+
+        <%= f.hidden_field(:password, value: @user.encrypted_password) %>
+
+        <div class="pt-5">
+          <%= f.submit "Update", class: "btn btn-info px-5 py-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>

@@ -6,15 +6,16 @@
 <body class="bg-light">
 <% if current_page? root_path %>
   <%= render "layouts/home_header" %>
+  <div class="container-fullwidth">
+    <%= yield %>
+  </div>
 <% else %>
   <%= render "layouts/header" %>
+  <div class="container-fullwidth">
+    <%= render "layouts/alerts" %>
+    <%= yield %>
+  </div>
 <% end %>
-<div class="container-fullwidth">
-  <% flash.each do |message_type, message| %>
-    <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-  <% end %>
-  <%= yield %>
-</div>
 </body>
 <%= render "layouts/footer" %>
 </html>
