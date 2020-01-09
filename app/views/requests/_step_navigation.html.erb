@@ -1,0 +1,21 @@
+<% if current_page?(new_job_request_path) %>
+  <% @steps = [[1, "New", "active"],
+              [2, "Confirm", "inactive"],
+              [3, "Finish", "inactive"]] %>
+<% elsif current_page?(job_requests_confirm_path) %>
+  <% @steps = [[1, "New", "active"],
+              [2, "Confirm", "active"],
+              [3, "Finish", "inactive"]] %>
+<% elsif current_page?(job_requests_done_path) %>
+  <% @steps = [[1, "New", "active"],
+              [2, "Confirm", "active"],
+              [3, "Finish", "active"]] %>
+<% end %>
+
+
+<div class="row align-center text-center">
+  <% @steps.each do |number, name, flag| %>
+    <%= render "#{flag}_navigation", step_number: number, step_name: name %>
+  <% end %>
+</div>
+

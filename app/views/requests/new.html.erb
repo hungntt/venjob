@@ -3,31 +3,12 @@
     <h1>APPLY FOR JOB</h1>
   </div>
   <div class="container bg-light border border-dark rounded-lg p-5">
-    <div class="row align-center text-center">
-      <div class="col bg-info py-2 border rounded-left rounded-pill" id="step-container">
-        <span class="fa-stack">
-          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-          <strong class="fa-stack-1x text-info">1</strong></span>
-        <strong class="text-light">New</strong>
-      </div>
-      <div class="col bg-light py-2 border-top border-bottom" id="step-container">
-        <span class="fa-stack">
-          <i class="fa fa-circle fa-stack-2x" id="step-circle-disabled"></i>
-          <strong class="fa-stack-1x text-secondary">2</strong></span>
-        <strong class="text-secondary">Confirm</strong>
-      </div>
-      <div class="col bg-light py-2 border-top border-bottom" id="step-container">
-        <span class="fa-stack">
-          <i class="fa fa-circle fa-stack-2x" id="step-circle-disabled"></i>
-          <strong class="fa-stack-1x text-secondary">3</strong></span>
-        <strong class="text-secondary">Finish</strong>
-      </div>
-    </div>
+    <%= render "step_navigation" %>
     <%= form_for (@request), url: job_requests_confirm_path(@job), method: :get, html: {class: "form-horizontal center"} do |f| %>
       <div class="form-row">
         <div class="col no-padding pr-2">
           <%= f.label :first_name, class: "label" %>
-          <%= f.text_field :fname, class: "form-control input"  %>
+          <%= f.text_field :fname, class: "form-control input" %>
         </div>
         <div class="col no-padding">
           <%= f.label :last_name, class: "label" %>
@@ -47,7 +28,7 @@
         </div>
       </div>
 
-      <div class="row align-center pt-5">                            `
+      <div class="row align-center pt-5"> `
         <div class="col-4 col-md-10 text-right">
           <%= submit_tag("Reset", {name: "reset", id: "reset_button", type: "reset", class: "btn btn-secondary py-2"}) %>
         </div>
