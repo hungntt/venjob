@@ -1,7 +1,7 @@
 <% steps = [[1, "New", "active"],
             [2, "Confirm", %w(confirm done).include?(action_name)  ? "active" : "inactive"],
             [3, "Finish", %w(done).include?(action_name) ? "active" : "inactive"]] %>
-                                                                  content_for
+
 <div class="row align-center text-center">
   <% steps.each do |number, name, flag| %>
     <%= render "#{flag}_navigation", step_number: number, step_name: name %>
