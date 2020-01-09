@@ -23,7 +23,11 @@ class RequestsController < ApplicationController
   end
 
   def new
-    @request = Request.new(request_params) rescue Request.new
+    @request = if params[:request].present?
+                 Request.new(request_params)
+               else
+                 Request.new
+               end
   end
 
   def confirm
@@ -39,4 +43,5 @@ class RequestsController < ApplicationController
   def request_params
     params.require(:request).permit(:fname, :lname, :email, :cv)
   end
+
 end
