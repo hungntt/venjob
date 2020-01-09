@@ -73,13 +73,11 @@ ActiveRecord::Schema.define(version: 2020_01_08_095407) do
     t.integer "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["city_id", "company_id", "name"], name: "index_jobs_on_city_id_and_company_id_and_name", unique: true
+    t.index ["city_id", "company_id", "name"], name: "index_jobs_on_city_id_and_company_id_and_name"
     t.index ["code"], name: "index_jobs_on_code"
   end
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "sent_user_id"
-    t.integer "received_user_id"
     t.bigint "job_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -88,9 +86,6 @@ ActiveRecord::Schema.define(version: 2020_01_08_095407) do
     t.string "email"
     t.string "cv"
     t.index ["job_id"], name: "index_requests_on_job_id"
-    t.index ["received_user_id"], name: "index_requests_on_received_user_id"
-    t.index ["sent_user_id", "received_user_id"], name: "index_requests_on_sent_user_id_and_received_user_id", unique: true
-    t.index ["sent_user_id"], name: "index_requests_on_sent_user_id"
   end
 
   create_table "saved_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

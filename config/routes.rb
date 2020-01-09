@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'requests/index'
-  get 'requests/create'
-  get 'requests/show'
-  get 'requests/new'
   root "pages#home"
   devise_for :users
 
@@ -21,4 +17,6 @@ Rails.application.routes.draw do
     get "requests/confirm", to: "requests#confirm"
     get "requests/done", to: "requests#done"
   end
+
+
 end

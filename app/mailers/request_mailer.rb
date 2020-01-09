@@ -1,6 +1,9 @@
 class RequestMailer < ActionMailer::Base
-  def request_confirmation(user)
-    @user = user
-    mail to: user.email, subject: "Request Confirmation"
+  default from: 'admin@venjob.com'
+  layout "mailer"
+
+  def request_confirmation(request)
+    @request = request
+    mail(to: @request.email, subject: "Request Confirmation")
   end
 end

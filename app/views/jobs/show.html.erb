@@ -4,7 +4,7 @@
       <i class="fa fa-home"></i>
     <% end %>   >
     <%= link_to city_jobs_path(@job.city_name.to_url) do %>
-    <%= @job.city_name %>
+      <%= @job.city_name %>
     <% end %> >
     <% industry_name_list = @job.industry_name_list %>
     <% industry_name_list.each_with_index do |name, index| %>
@@ -38,9 +38,11 @@
         </h6>
       </div>
     </div>
-    <div class="col-12 col-md-2 scroll-target">
-      <button class="btn btn-block btn-lg btn-outline-info">Apply <i class="fa fa-send"></i></button>
-      <button class="btn btn-block btn-lg btn-outline-danger">Save <i class="fa fa-heart"></i></button>
+    <div class="col-12 col-md-2 scroll-target" id="no-link-style">
+      <%= link_to new_job_request_path(@job) do %>
+        <button class="btn btn-block btn-lg btn-outline-info">Apply <i class="fa fa-send"></i></button>
+      <% end %>
+      <button class="btn btn-block btn-lg btn-outline-danger mt-2">Save <i class="fa fa-heart"></i></button>
     </div>
   </div>
 </div>

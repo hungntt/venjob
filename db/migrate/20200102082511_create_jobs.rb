@@ -16,6 +16,6 @@ class CreateJobs < ActiveRecord::Migration[6.0]
       t.timestamps null: false
     end
     add_index :jobs, :code
-    add_index :jobs, %i[city_id company_id name], unique: true
+    add_index :jobs, %i[city_id company_id name]
   end
 end

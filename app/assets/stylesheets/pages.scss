@@ -291,5 +291,12 @@ td#job-name {
 }
 
 #step-circle-disabled {
-    color: $gray-300;
+  color: $gray-300;
+}
+
+div#no-link-style {
+  a {
+    color: inherit;
+    text-decoration: none !important;
+  }
 }
