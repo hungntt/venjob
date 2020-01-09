@@ -1,8 +1,7 @@
 class RequestsController < ApplicationController
-  before_action :load_job, only: %i[new confirm]
+  before_action :load_job, only: %i[new confirm done]
   before_action :new_request, only: %i[confirm done]
   before_action :check_input, only: %i[confirm done]
-  after_action :set_request_job_id, only: %i[new]
 
   def index
   end
@@ -25,9 +24,9 @@ class RequestsController < ApplicationController
 
   def new
     @request = if params[:request].present?
-                 Request.new(request_params)
+                 @job.requests.new(request_params)
                else
-                 Request.new
+                 @job.requests.new
                end
 
   end
@@ -38,21 +37,17 @@ class RequestsController < ApplicationController
 
   private
 
-  def new_request
-    @request = Request.new(request_params)
-    set_request_job_id
-  end
-
   def load_job
     @job = Job.find_by(id: params[:job_id])
   end
 
-  def request_params
-    params.require(:request).permit(:fname, :lname, :email, :cv)
+  def new_request
+    @request = @job.requests.new(request_params)
   end
 
-  def set_request_job_id
-    @request.job_id = params[:job_id]
+
+  def request_params
+    params.require(:request).permit(:fname, :lname, :email, :cv)
   end
 
   def check_input
