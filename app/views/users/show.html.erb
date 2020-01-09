@@ -1,16 +1,15 @@
 <div class="container">
-  <div class="modal-body">
+  <div class="modal-body text-dark">
     <div style="text-align: center;">
       <%= image_tag "https://3.bp.blogspot.com/-NbuCiSzSexA/WafsJZMb9fI/AAAAAAAAhiM/DnhbVyUGSi47tIUZTyh4CWMa7rw_iGnLgCLcBGAs/s1600/1408830065792.jpg", class: "rounded-circle", width: "140", height: "140" %>
-      <h6 class="my-3"><%= link_to "Edit profile", edit_user_path %></h6>
+      <h6 class="my-3 text-primary"><%= link_to "Edit profile", edit_user_registration_path %></h6>
       <h3 class="media-heading"><%= @user.fname %> <%= @user.lname %></h3>
-      <h4 class="media-heading"><%= @user.email %></h4>
+      <h6><%= @user.email %></h6>
     </div>
     <hr>
     <div style="text-align: center;">
       <div class="row"><strong>CV: </strong><br>
         <%=@user.resume %></div>
-
     </div>
   </div>
 </div>

@@ -1,21 +1,9 @@
 class UsersController < ApplicationController
-  before_action :load_user, only: %i[show edit update]
+  before_action :load_user, only: %i[show]
 
   def show
   end
 
-
-  def update
-    if @user.update(user_params)
-      flash[:success] = "Profile updated"
-      redirect_to @user
-    else
-      render :edit
-    end
-  end
-
-  def edit
-  end
 
   private
 
@@ -23,7 +11,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def user_params
-    params.require(:user).permit(:fname, :lname, :email, :resume)
-  end
 end
