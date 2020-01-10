@@ -5,8 +5,8 @@
       <h6 class="my-3 text-primary"><%= link_to "Edit profile", edit_user_registration_path %></h6>
       <h6 class="my-3 text-primary"><%= link_to "Favorite jobs", user_favorites_path(current_user.id) %></h6>
       <h6 class="my-3 text-primary"><%= link_to "History jobs", user_histories_path(current_user.id) %></h6>
-      <h3 class="media-heading"><%= @user.fname %> <%= @user.lname %></h3>
-      <h6><%= @user.email %></h6>
+      <h3 class="media-heading"><%= current_user.fname %> <%= current_user.lname %></h3>
+      <h6><%= current_user.email %></h6>
     </div>
     <hr>
   </div>
