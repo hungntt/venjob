@@ -9,7 +9,7 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    if @favorite_job.save
+    if @favorite_job.save!
       flash.now[:success] = "Successfully add new job"
     else
       flash.now[:danger] = "not successful"
@@ -35,18 +35,14 @@ class FavoritesController < ApplicationController
   end
 
   def set_favorite_job
-    @favorite_job = @job.favorites.new(favorite_job_params)
+    @favorite_job = current_user.favorites.new(favorite_job_params)
   end
 
   def load_favorite_job
-    @favorited_job = SavedJob.find_by(favorited_job_params)
+    @favorited_job = current_user.favorites.find(params[:id])
   end
 
   def favorite_job_params
     params.permit(:user_id, :job_id)
-  end
-
-  def favorited_job_params
-    params.permit(:id)
   end
 end

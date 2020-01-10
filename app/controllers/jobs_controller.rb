@@ -21,7 +21,6 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @favorite_job = @job.favorites.new(user_id: current_user.id)
     @favorited_job = current_user.favorites.find_by(job_id: @job.id)
-
   end
 
   private
