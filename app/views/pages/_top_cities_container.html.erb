@@ -4,16 +4,15 @@
     <hr class="divider my-4 bg-info">
     <div class="row" id="info-box">
       <% @top_cities.each do |city, job_count| %>
-        <% if job_count > 0 %>
-          <div class="col-lg-3 col-md-6 text-center">
-            <div class="mt-5">
-              <%= link_to city_jobs_path(city) do %>
-                <h3 class="h4 mb-2"><%= city.name %></h3>
-                <p class="text-muted mb-0"><%= pluralize(job_count, "job") %></p>
-              <% end %>
-            </div>
+        <% next if job_count.zero? %>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="mt-5">
+            <%= link_to city_jobs_path(city) do %>
+              <h3 class="h4 mb-2"><%= city.name %></h3>
+              <p class="text-muted mb-0"><%= pluralize(job_count, "job") %></p>
+            <% end %>
           </div>
-        <% end %>
+        </div>
       <% end %>
       <div class="col-lg-3 col-md-6 text-center">
         <%= link_to cities_path do %>

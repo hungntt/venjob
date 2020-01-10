@@ -19,7 +19,7 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
-    @fav_job = @job.favorites.new(user_id: current_user.id)
+    @favorite_job = @job.favorites.new(user_id: current_user.id)
     @favorited_job = current_user.favorites.find_by(job_id: @job.id)
 
   end
@@ -31,9 +31,5 @@ class JobsController < ApplicationController
 
     history = current_user.histories.find_or_initialize_by(job_id: params[:id])
     history.update(updated_at: Time.current)
-
-    history_list = current_user.histories.order(updated_at: :desc)
-
-    history_list.last.destroy if history_list.count > 20
   end
 end

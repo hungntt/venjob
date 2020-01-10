@@ -4,7 +4,7 @@
     <hr class="divider my-4 bg-info">
     <div class="row" id="info-box">
       <% @top_industries.each do |industry, job_count| %>
-        <% if job_count > 0 %>
+        <% next if job_count.zero? %>
           <div class="col-lg-3 col-md-6 text-center">
             <div class="mt-5">
               <%= link_to industry_jobs_path(industry) do %>
@@ -14,7 +14,6 @@
             </div>
           </div>
         <% end %>
-      <% end %>
       <div class="col-lg-3 col-md-6 text-center">
         <%= link_to industries_path do %>
           <div class="mt-5">

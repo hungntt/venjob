@@ -14,4 +14,7 @@ class User < ApplicationRecord
   #                             foreign_key: "received_user_id",
   #                             dependent: :destroy
   #has_many :senders, through: :passive_requests, source: :sent_user_id
+  def favorited_job?(job)
+    self.favorites.exists?(job_id: job.id)
+  end
 end

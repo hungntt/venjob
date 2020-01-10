@@ -43,7 +43,7 @@
         <button class="btn btn-block btn-lg btn-outline-info">Apply <i class="fa fa-send"></i></button>
       <% end %>
       <div id="favorite_form_<%= @job.id %>">
-        <% if current_user.favorites.exists?(job_id: @job.id) %>
+        <% if current_user.favorited_job?(@job) %>
           <%= render "shared/unfavorite_btn", job: @job, favorited_job: @favorited_job %>
         <% else %>
           <%= render "shared/favorite_btn", job: @job %>

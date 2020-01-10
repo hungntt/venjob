@@ -1,15 +1,15 @@
 class FavoritesController < ApplicationController
   before_action :load_job, only: %i[create destroy]
-  before_action :new_fav_job, only: %i[create]
+  before_action :set_favorite_job, only: %i[create]
   before_action :load_favorite_job, only: :destroy
   before_action :load_user, only: :index
 
   def index
-    @jobs = current_user.favorites
+    @jobs = @user.favorites
   end
 
   def create
-    if @fav_job.save
+    if @favorite_job.save
       flash.now[:success] = "Successfully add new job"
     else
       flash.now[:danger] = "not successful"
@@ -31,19 +31,19 @@ class FavoritesController < ApplicationController
   end
 
   def load_user
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
   end
 
-  def new_fav_job
-    @fav_job = @job.favorites.new(saved_job_params)
+  def set_favorite_job
+    @favorite_job = @job.favorites.new(favorite_job_params)
   end
 
   def load_favorite_job
     @favorited_job = SavedJob.find_by(favorited_job_params)
   end
 
-  def saved_job_params
-    params.permit(:user_id, :job_id, :role)
+  def favorite_job_params
+    params.permit(:user_id, :job_id)
   end
 
   def favorited_job_params

@@ -1,5 +1,4 @@
 <%= form_tag(job_favorites_path(job), remote: true) do %>
-  <%= hidden_field_tag :user_id, current_user.id %>
   <%= button_tag :submit, class: "btn btn-block btn-lg btn-outline-danger mt-2", id: "favorite-btn" do %>
     Favorite <i class="fa fa-heart"></i>
   <% end %>
