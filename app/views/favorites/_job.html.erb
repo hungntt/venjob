@@ -1,0 +1,26 @@
+<tr>
+  <td>
+    <div class="container-fluid job-container py-3">
+      <div class="row">
+        <div class="col-12 col-md-11 text-dark" id="job-div">
+          <%= link_to job_path(job.job_id) do %>
+            <h4 class="text-dark"><%= job.job_name %></h4>
+            <h6><i class="fa fa-suitcase"></i> <%= job.company_name %></h6>
+            <h6><i class="fa fa-map-pin"></i> <%= job.city_name %> <i class="fa fa-dollar pl-5"></i> <%= job.job_salary %>
+            </h6>
+          <%end %>
+        </div>
+
+        <div class="col-12 col-md-1 no-padding text-center">
+          <div id="favorite_form_<%= job.job_id %>">
+            <% if current_user.favorites.exists?(job_id: job.job_id) %>
+              <%= render "shared/unfavorite_btn", job: job.job_id, favorited_job: job %>
+            <% else %>
+              <%= render "shared/favorite_btn", job: job.job_id %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>

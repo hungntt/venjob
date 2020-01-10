@@ -4,6 +4,7 @@
     <hr class="divider my-4 bg-info">
     <div class="row" id="info-box">
       <% @top_cities.each do |city, job_count| %>
+        <% next if job_count.zero? %>
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
             <%= link_to city_jobs_path(city) do %>

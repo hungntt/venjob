@@ -2,7 +2,6 @@
   <td>
     <div class="container-fluid job-container py-3">
       <div class="row">
-
         <div class="col-12 col-md-11 text-dark" id="job-div">
           <%= link_to job_path(job.id) do %>
           <h4 class="text-dark"><%= job.name %></h4>
@@ -28,7 +27,13 @@
         </div>
 
         <div class="col-12 col-md-1 no-padding text-center">
-          <i class="fa fa-heart-o fa-2x"></i>
+          <div id="favorite_form_<%= job.id %>">
+            <% if current_user.favorites.exists?(job_id: job.id) %>
+              <%= render "shared/unfavorite_btn", job: job, favorited_job: job.favorites.find_by(user_id: current_user.id) %>
+            <% else %>
+              <%= render "shared/favorite_btn", job: job %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+  before_action :history, only: :show
+
   def index
     if params[:city_id].present?
       city = City.friendly.find(params[:city_id])
@@ -17,5 +19,15 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+    @favorite_job = current_user.favorites.find_or_initialize_by(job_id: @job.id)
+  end
+
+  private
+
+  def history
+    return unless user_signed_in?
+
+    history = current_user.histories.find_or_initialize_by(job_id: params[:id])
+    history.update(updated_at: Time.current)
   end
 end

@@ -1,10 +1,5 @@
 <div class="container">
-  <div class="modal-body">
-    <div style="text-align: center;">
-      <%= image_tag "https://3.bp.blogspot.com/-NbuCiSzSexA/WafsJZMb9fI/AAAAAAAAhiM/DnhbVyUGSi47tIUZTyh4CWMa7rw_iGnLgCLcBGAs/s1600/1408830065792.jpg", class: "rounded-circle", width: "140", height: "140" %>
-    </div>
-    <hr>
-
+  <%= render "users/users_header_info" %>
     <div style="text-align: center;">
       <h3>Update account information</h3>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>

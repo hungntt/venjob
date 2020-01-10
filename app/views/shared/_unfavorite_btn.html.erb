@@ -1,0 +1,5 @@
+<%= form_tag(job_favorite_path(job, favorited_job), method: :delete, remote: true) do  %>
+  <%= button_tag :submit, class: "btn btn-block btn-lg btn-danger mt-2" do %>
+    <small>Unfavorite</small> <i class="fa fa-heart"></i>
+  <% end %>
+<% end %>

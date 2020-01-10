@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 2020_01_08_095407) do
   end
 
   create_table "saved_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "job_id"
+    t.bigint "user_id"
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -118,6 +118,4 @@ ActiveRecord::Schema.define(version: 2020_01_08_095407) do
   add_foreign_key "industry_jobs", "industries"
   add_foreign_key "industry_jobs", "jobs"
   add_foreign_key "requests", "jobs"
-  add_foreign_key "saved_jobs", "jobs"
-  add_foreign_key "saved_jobs", "users"
 end
