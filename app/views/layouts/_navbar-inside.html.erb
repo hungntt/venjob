@@ -9,8 +9,6 @@
   <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav ml-auto my-2 my-lg-0">
       <% if user_signed_in? %>
-        <!--        <li><%#= link_to "Favorite", favorite_path %></li>-->
-        <!--        <li><%#= link_to "History", history_path %></li>-->
         <li class="dropdown">
         <li class="nav-item pl-3">
           <%= link_to "Profile", current_user, method: :get, class: "nav-link text-white pb-3" %>

@@ -32,7 +32,6 @@ class RequestsController < ApplicationController
   end
 
   def confirm
-
   end
 
   private
@@ -44,7 +43,6 @@ class RequestsController < ApplicationController
   def new_request
     @request = @job.requests.new(request_params)
   end
-
 
   def request_params
     params.require(:request).permit(:fname, :lname, :email, :cv)

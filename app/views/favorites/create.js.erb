@@ -1,0 +1,1 @@
+$("#favorite_form_<%= @job.id %>").html("<%= escape_javascript(render "shared/unfavorite_btn", job: @job, favorited_job: @fav_job) %>");

@@ -4,7 +4,8 @@ class Job < ApplicationRecord
 
   has_many :industry_jobs
   has_many :industries, through: :industry_jobs
-  has_many :saved_jobs
+  has_many :favorites
+  has_many :histories
   has_many :requests
 
   delegate :name, to: :city, prefix: true

@@ -42,7 +42,15 @@
       <%= link_to new_job_request_path(@job) do %>
         <button class="btn btn-block btn-lg btn-outline-info">Apply <i class="fa fa-send"></i></button>
       <% end %>
-      <button class="btn btn-block btn-lg btn-outline-danger mt-2">Save <i class="fa fa-heart"></i></button>
+      <div id="favorite_form_<%= @job.id %>">
+        <% if current_user.favorites.exists?(job_id: @job.id) %>
+          <%= render "shared/unfavorite_btn", job: @job, favorited_job: @favorited_job %>
+        <% else %>
+          <%= render "shared/favorite_btn", job: @job %>
+        <% end %>
+      </div>
+
+
     </div>
   </div>
 </div>
