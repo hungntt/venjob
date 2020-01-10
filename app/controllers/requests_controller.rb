@@ -4,6 +4,7 @@ class RequestsController < ApplicationController
   before_action :check_input, only: %i[confirm done]
 
   def index
+    @applied_job = current_user.requests
   end
 
 
@@ -28,7 +29,6 @@ class RequestsController < ApplicationController
                else
                  @job.requests.new
                end
-
   end
 
   def confirm

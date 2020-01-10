@@ -1,5 +1,11 @@
-<%= form_tag(job_favorites_path(job), remote: true) do %>
-  <%= button_tag :submit, class: "btn btn-block btn-lg btn-outline-danger mt-2", id: "favorite-btn" do %>
+<% if user_signed_in? %>
+  <%= form_tag(job_favorites_path(job), remote: true) do %>
+    <%= button_tag :submit, class: "btn btn-block btn-lg btn-outline-danger mt-2", id: "favorite-btn" do %>
+      Favorite <i class="fa fa-heart"></i>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= button_to new_user_session_path, method: :get, class: "btn btn-block btn-lg btn-outline-danger mt-2" do %>
     Favorite <i class="fa fa-heart"></i>
   <% end %>
 <% end %>
