@@ -61,6 +61,6 @@ gem "activerecord-import"
 gem "geocoder"
 gem "config"
 gem "kaminari"
-gem "friendly_id", '~> 5.2.4'
+gem "friendly_id", "~> 5.2.4"
 gem "pry"
 gem "stringex"

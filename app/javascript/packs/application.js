@@ -6,6 +6,7 @@
 //= require bootstrap
 //= require rails-ujs
 //= require turbolinks
+//= require popper
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()

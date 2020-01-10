@@ -2,10 +2,9 @@ class FavoritesController < ApplicationController
   before_action :load_job, only: %i[create destroy]
   before_action :set_favorite_job, only: %i[create]
   before_action :load_favorite_job, only: :destroy
-  before_action :load_user, only: :index
 
   def index
-    @jobs = @user.favorites
+    @jobs = current_user.favorites
   end
 
   def create
@@ -30,19 +29,11 @@ class FavoritesController < ApplicationController
     @job = Job.find_by(id: params[:job_id])
   end
 
-  def load_user
-    @user = current_user
-  end
-
   def set_favorite_job
-    @favorite_job = current_user.favorites.new(favorite_job_params)
+    @favorite_job = current_user.favorites.new(job_id: @job.id)
   end
 
   def load_favorite_job
     @favorited_job = current_user.favorites.find(params[:id])
-  end
-
-  def favorite_job_params
-    params.permit(:user_id, :job_id)
   end
 end
