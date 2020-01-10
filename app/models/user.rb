@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :favorites
   has_many :histories
+  has_many :requests, class_name: "Request", primary_key: :email, foreign_key: :email
   #has_many :active_requests,  class_name: "Request",
   #                            foreign_key: "sent_user_id",
   #                            dependent: :destroy

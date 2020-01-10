@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :favorites, only: %i[index]
-    resources :histories, only: %i[index history]
+    resources :histories, only: %i[index]
+    resources :requests, only: %i[index]
   end
 
   resources :jobs, only: %i[index show]

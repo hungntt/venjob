@@ -19,6 +19,8 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+    return unless user_signed_in?
+
     @favorite_job = current_user.favorites.find_or_initialize_by(job_id: @job.id)
   end
 
