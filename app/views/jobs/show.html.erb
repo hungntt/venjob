@@ -31,7 +31,6 @@
           <i class="fa fa-dollar pl-5"></i>
           <%= @job.salary %>
         </h6>
-        </h6>
         <h6>
           <i class="fa fa-hand-o-right"></i>
           <%= simple_format(@job.description) %>
@@ -44,13 +43,11 @@
       <% end %>
       <div id="favorite_form_<%= @job.id %>">
         <% if current_user.favorited_job?(@job) %>
-          <%= render "shared/unfavorite_btn", job: @job, favorited_job: @favorited_job %>
+          <%= render "shared/unfavorite_btn", job: @job, favorited_job: @favorite_job %>
         <% else %>
           <%= render "shared/favorite_btn", job: @job %>
         <% end %>
       </div>
-
-
     </div>
   </div>
 </div>

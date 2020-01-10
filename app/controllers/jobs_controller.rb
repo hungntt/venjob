@@ -19,8 +19,7 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
-    @favorite_job = @job.favorites.new(user_id: current_user.id)
-    @favorited_job = current_user.favorites.find_by(job_id: @job.id)
+    @favorite_job = current_user.favorites.find_or_initialize_by(job_id: @job.id)
   end
 
   private
