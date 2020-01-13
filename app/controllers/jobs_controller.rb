@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
   before_action :history, only: :show
+  before_action :collection, only: :index
 
   def index
     if params[:city_id].present?
@@ -11,8 +12,17 @@ class JobsController < ApplicationController
       @name = job.name
       @jobs = job.jobs
     else
+      binding.pry
       @name = "JOB LIST"
-      @jobs = Job.all
+      jobs = Solr::Base.search(params)
+      @job_count = jobs.count
+
+      #params[:search_text] = "All job "
+      #params[:search_text] += "have name/company name is #{params[:search]} " if params[:search].present?
+      #params[:search_text] += "industry #{params[:industry]} " if params[:industry].present?
+      #params[:search_text] += "in #{params[:city]} " if params[:city].present?
+      #
+      #@jobs = Job.all
     end
     @jobs = @jobs.order(updated_at: :desc).page(params[:page]).per(Settings.jobs.limit)
   end
@@ -32,4 +42,10 @@ class JobsController < ApplicationController
     history = current_user.histories.find_or_initialize_by(job_id: params[:id])
     history.update(updated_at: Time.current)
   end
+
+  def collection
+    @list_cities = City.all
+    @list_industries = Industry.all
+  end
+
 end
