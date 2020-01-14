@@ -148,6 +148,26 @@ namespace :job do
       IndustryJob.find_or_create_by!(industry_id: industry_id, job_id: job_id)
     end
   end
+
+  desc "Index job with Solr"
+
+  task solr_index: :environment do
+    jobs = Job.all
+    jobs.each do |job|
+      Solr::Base.add_data(job)
+      p "Successfully add #{job.id}"
+    end
+  end
+
+  desc "Delete index job on Solr"
+
+  task solr_delete: :environment do
+    jobs = Job.all
+    jobs.each do |job|
+      Solr::Base.delete_data(job.id)
+      p "Successfully delete #{job.id}"
+    end
+  end
 end
 
 def get_city_id(name)

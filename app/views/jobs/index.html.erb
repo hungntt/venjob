@@ -1,5 +1,5 @@
 <div class="container-fullwidth text-center text-light py-3 bg-dark">
-  <h2><small>•</small> <%=  @name %> <small>•</small></h2>
+  <h2><small>•</small> <%= @name %> <small>•</small></h2>
 </div>
 <div class="no-padding custom_pagination d-flex align-items-end flex-column bg-light">
   <div class="page_info p-2">
@@ -11,7 +11,11 @@
 </div>
 <table class="table table-hover table-striped table-light no-padding">
   <tbody>
-  <%= render partial: "job", collection: @jobs %>
+  <% if @jobs.is_a?(ActiveRecord::Relation) %>
+    <%= render partial: "job", collection: @jobs %>
+  <% else %>
+    <%= render partial: "solrjob", collection: @jobs %>
+  <% end %>
   </tbody>
 </table>
 

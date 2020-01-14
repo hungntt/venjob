@@ -41,9 +41,9 @@
       <%= render "shared/apply_btn", job: @job %>
       <div id="favorite_form_<%= @job.id %>">
         <% if current_user && current_user.favorited_job?(@job) %>
-          <%= render "shared/unfavorite_btn", job: @job, favorited_job: @favorite_job %>
+          <%= render "shared/unfavorite_btn", job_id: @job.id, favorited_job: @favorite_job %>
         <% else %>
-          <%= render "shared/favorite_btn", job: @job %>
+          <%= render "shared/favorite_btn", job_id: @job.id %>
         <% end %>
       </div>
     </div>

@@ -8,9 +8,15 @@ class City < ApplicationRecord
   before_validation :format_slug
   friendly_id :name, use: %i[slugged finders]
 
+  def job_count
+    jobs.count
+  end
+
   private
 
   def format_slug
     self.slug = name.to_url
   end
+
+
 end

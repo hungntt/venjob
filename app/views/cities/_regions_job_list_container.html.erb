@@ -4,7 +4,7 @@
       <h2 class="text-center mt-0"><%= country.upcase %> <small>(<%= job_count %>)</small></h2>
       <hr class="divider my-4 bg-info">
       <div class="row" id="info-box">
-        <% list = get_countries_job_list(country) %>
+        <% list = countries_job_list(country) %>
         <% list.each do |city_name, count| %>
           <div class="col-lg-3 col-md-6 text-center">
             <div class="mt-5">
