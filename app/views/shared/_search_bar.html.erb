@@ -1,6 +1,6 @@
 <div class="col-md-10 col-lg-8 col-xl-8 mx-auto py-3 ">
-  <% list_cities = City.all %>
-  <% list_industries = Industry.all %>
+  <% list_cities = cities_list %>
+  <% list_industries = industries_list %>
   <%= form_tag(jobs_path, method: :get, class: "form-row has-search") do %>
     <div class="col-12 col-md-6 mb-md-0 no-padding">
       <span class="fa fa-search form-control-feedback"></span>

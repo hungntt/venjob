@@ -14,9 +14,9 @@
         <div class="col-12 col-md-1 no-padding text-center">
           <div id="favorite_form_<%= job.job_id %>">
             <% if current_user.favorites.exists?(job_id: job.job_id) %>
-              <%= render "shared/unfavorite_btn", job: job.job_id, favorited_job: job %>
+              <%= render "shared/unfavorite_btn", job_id: job.job_id, favorited_job: job %>
             <% else %>
-              <%= render "shared/favorite_btn", job: job.job_id %>
+              <%= render "shared/favorite_btn", job_id: job.job_id %>
             <% end %>
           </div>
         </div>

@@ -29,7 +29,7 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     return unless user_signed_in?
 
-    @favorite_job = current_user.favorites.find_or_initialize_by(job_id: @job.id)
+    @favorite_job = Favorite.find_by(job_id: @job.id, user_id: current_user.id)
   end
 
   private
