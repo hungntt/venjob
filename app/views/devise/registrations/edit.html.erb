@@ -34,7 +34,7 @@
         <div class="field">
           <%= f.label :password_confirmation, class: "pt-3" %><br/>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-        </div>
+        </div>                       City.all.select { |c| c.job_count.positive? }
 
         <div class="field">
           <%= f.label :current_password, class: "pt-3" %> <i>(we need your current password to confirm your changes)</i><br/>
