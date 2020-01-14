@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <% applied = current_user.requests.exists?(job_id: job.id) %>
-  <%= button_to new_job_request_path(job), class: "btn btn-block btn-lg #{applied ? 'btn-dark' : 'btn-outline-info'}", disabled: applied do %>
+  <%= button_to new_job_request_path(job), method: :get, class: "btn btn-block btn-lg #{applied ? 'btn-dark' : 'btn-outline-info'}", disabled: applied do %>
     Apply <i class="fa fa-send"></i>
   <% end %>
 <% else %>
