@@ -18,7 +18,7 @@
       <div class="form-row">
         <div class="col no-padding">
           <%= f.label :email, class: "label" %>
-          <%= f.email_field :email, class: "form-control input" %>
+          <%= f.email_field :email, class: "form-control input", value: current_user.email %>
         </div>
       </div>
       <div class="form-row">

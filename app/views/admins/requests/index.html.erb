@@ -1,0 +1,40 @@
+<div class="container-fullwidth text-center text-light py-3 bg-dark">
+  <h2><small>•</small> Manage Requests Portal <small>•</small></h2>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 my-5">
+      <%= form_tag url: admins_requests_path, html: {class: "form-horizontal center"} do %>
+        <div class="row">
+          <div class="col-md-2 text-left my-auto"><label>Email</label></div>
+          <div class="col-md-10">
+            <input class="form-control my-1" id="email" placeholder="Search by email" aria-label="Search" name="email" value="<%= params[:email] %>">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 text-left my-auto"><label>City</label></div>
+          <div class="col-md-10"><%= select_tag "city", options_from_collection_for_select(cities_list, "id", "name", params[:city]), include_blank: "Select city", class: "form-control my-1" %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 text-left text-middle my-auto">Industry</div>
+          <div class="col-md-10"><%= select_tag "industry", options_from_collection_for_select(industries_list, "id", "name", params[:industry]), include_blank: "Select industry", class: "form-control my-1" %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 text-left my-auto"><label>Date</label></div>
+          <div class="col-md-5"><%= date_field_tag 'date_start', params[:date_start], class: 'form-control my-1' %></div>
+          <div class="col-md-5"><%= date_field_tag 'date_end', params[:date_end], class: 'form-control my-1' %></div>
+        </div>
+        <div class="pt-3 d-flex justify-content-center">
+          <%= submit_tag 'Search', class: "btn btn-info px-5 mx-2" %>
+          <%= link_to("Download CSV", admins_requests_path(format: :csv), class: "btn btn-outline-info") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover table-striped table-light no-padding">
+  <tbody>
+  <%= render partial: "requests/job", collection: @request %>
+  </tbody>
+</table>

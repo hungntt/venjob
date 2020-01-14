@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+
   root "pages#home"
   devise_for :users
+  devise_for :admins
+
+  namespace :admins do
+    resources :requests, only: %i[index]
+  end
 
   resources :users do
     resources :favorites, only: %i[index]
