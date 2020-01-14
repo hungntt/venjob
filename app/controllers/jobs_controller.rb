@@ -7,24 +7,21 @@ class JobsController < ApplicationController
       city = City.friendly.find(params[:city_id])
       @name = city.name
       @jobs = city.jobs
+      @jobs = Kaminari.paginate_array(@jobs.order(updated_at: :desc)).page(params[:page]).per(Settings.jobs.limit)
     elsif params[:industry_id].present?
       job = Industry.friendly.find(params[:industry_id])
       @name = job.name
       @jobs = job.jobs
+      @jobs = Kaminari.paginate_array(@jobs.order(updated_at: :desc)).page(params[:page]).per(Settings.jobs.limit)
     else
-      binding.pry
-      @name = "JOB LIST"
-      jobs = Solr::Base.search(params)
-      @job_count = jobs.count
+      @name = "Find: " + params[:search]
+      @name += " at " + params[:city] unless params[:city].empty?
+      @name += " in " + params[:industry] unless params[:industry].empty?
 
-      #params[:search_text] = "All job "
-      #params[:search_text] += "have name/company name is #{params[:search]} " if params[:search].present?
-      #params[:search_text] += "industry #{params[:industry]} " if params[:industry].present?
-      #params[:search_text] += "in #{params[:city]} " if params[:city].present?
-      #
-      #@jobs = Job.all
+      @jobs = Solr::Base.search(params)
+      @jobs = Kaminari.paginate_array(@jobs).page(params[:page]).per(Settings.jobs.limit)
     end
-    @jobs = @jobs.order(updated_at: :desc).page(params[:page]).per(Settings.jobs.limit)
+
   end
 
   def show

@@ -7,10 +7,10 @@
       <%= search_field_tag :search, params[:search], placeholder: "Search by job name, company name", class: "form-control rounded-left no-border-radius bg-light" %>
     </div>
     <div class="col-md-2 no-padding">
-      <%= select_tag "city", options_from_collection_for_select(list_cities, "name", "name", params[:city]), include_blank: "Select city", class: "form-control no-border-radius bg-light" %>
+      <%= select_tag "city", options_from_collection_for_select(list_cities, "name", "name"), include_blank: "Select city", class: "form-control no-border-radius bg-light" %>
     </div>
     <div class="col-md-2 no-padding">
-      <%= select_tag "industry", options_from_collection_for_select(list_industries, "name", "name", params[:industry]), include_blank: "Select industry", class: "form-control no-border-radius bg-light" %>
+      <%= select_tag "industry", options_from_collection_for_select(list_industries, "name", "name"), include_blank: "Select industry", class: "form-control no-border-radius bg-light" %>
     </div>
     <div class="col-12 col-md-2 no-padding no-border-radius">
       <%= button_tag "", class: "h-100 btn btn-block btn-lg btn-info fa fa-search rounded-right no-border-radius", name: nil %>

@@ -1,0 +1,42 @@
+<tr>
+  <td>
+    <div class="container-fluid job-container py-3">
+      <div class="row">
+        <div class="col-12 col-md-11 text-dark" id="job-div">
+          <%= link_to job_path(solrjob["id"]) do %>
+            <h4 class="text-dark"><%= solrjob["name"].first %></h4>
+            <h6><i class="fa fa-suitcase"></i> <%= solrjob["company"].first %></h6>
+            <h6><i class="fa fa-map-pin"></i> <%= solrjob["city"].first %> <i class="fa fa-dollar pl-5"></i> <%= solrjob["salary"].first %>
+            </h6>
+            <h6>
+              <% job_description =  solrjob["description"].first%>
+              <i class="fa fa-hand-o-right"></i>
+              <% if job_description.length > 250 %>
+                <%= truncate(simple_format(job_description), escape: false, length: 250) %>
+                <%= link_to '...Read more', '', class: "read-more-#{solrjob["id"]} text-info" %>
+                <script type="text/javascript">
+                    $('.read-more-<%= solrjob["id"] %>').on('click', function (e) {
+                        e.preventDefault();
+                        $(this).parent().html('<%= escape_javascript simple_format(job_description) %>')
+                    })
+                </script>
+              <% else %>
+                <%= job_description %>
+              <% end %>
+            </h6>
+          <%end %>
+        </div>
+        <% job = Job.find(solrjob["id"]) %>
+        <div class="col-12 col-md-1 no-padding text-center">
+          <div id="favorite_form_<%= solrjob["id"] %>">
+            <% if current_user && current_user.favorites.exists?(job_id: solrjob["id"]) %>
+              <%= render "shared/unfavorite_btn", job: job, favorited_job: job.favorites.find_by(user_id: current_user.id) %>
+            <% else %>
+              <%= render "shared/favorite_btn", job: job %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>
