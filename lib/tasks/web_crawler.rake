@@ -155,9 +155,9 @@ namespace :job do
     jobs = Job.all
     jobs.each do |job|
       Solr::Base.add_data(job)
-      p "Successfully add #{job}"
+      p "Successfully add #{job.id}"
     end
-    end
+  end
 
   desc "Delete index job on Solr"
 

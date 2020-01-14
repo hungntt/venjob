@@ -13,7 +13,7 @@
   <tbody>
   <% if @jobs.is_a?(ActiveRecord::Relation) %>
     <%= render partial: "job", collection: @jobs %>
-    <% else %>
+  <% else %>
     <%= render partial: "solrjob", collection: @jobs %>
   <% end %>
   </tbody>

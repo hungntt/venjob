@@ -13,7 +13,7 @@ module Solr
     end
 
     def self.add_data(job)
-      solr.add id: job.id, name: job.name, company: job.company_name, industry: job.industries.pluck(:name), city: job.city_name, salary: job.salary, description: job.description
+      solr.add id: job.id, name: job.name, company: job.company_name, industry: job.industries.pluck(:name), city: job.city_name, salary: job.salary, description: job.description, updated_at: job.updated_at
       solr.commit
     end
 
@@ -26,7 +26,7 @@ module Solr
       params[:search] ||= ""
       industry = params[:industry].present? ? "industry:\"#{escape(params[:industry])}\"" : "industry:*"
       city = params[:city].present? ? "city:\"#{escape(params[:city])}\"" : "city:*"
-      response = solr.select params: { q: "name:*#{escape(params[:search])}*", fq: [industry, city], rows: Job.count }
+      response = solr.select params: { q: "name:*#{escape(params[:search])}*", fq: [industry, city], sort: "updated_at desc", rows: Job.count }
 
       response["response"]["docs"]
     end

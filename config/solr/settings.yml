@@ -1,6 +1,6 @@
 default: &default
   logger:
-    path: 'log/solr.log'
+    path: "log/solr.log"
     age: 5
     size: 5242880
   connection:

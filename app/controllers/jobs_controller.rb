@@ -7,13 +7,14 @@ class JobsController < ApplicationController
       city = City.friendly.find(params[:city_id])
       @name = city.name
       @jobs = city.jobs
-      @jobs = Kaminari.paginate_array(@jobs.order(updated_at: :desc)).page(params[:page]).per(Settings.jobs.limit)
+      @jobs = @jobs.order(updated_at: :desc).page(params[:page]).per(Settings.jobs.limit)
     elsif params[:industry_id].present?
       job = Industry.friendly.find(params[:industry_id])
       @name = job.name
       @jobs = job.jobs
-      @jobs = Kaminari.paginate_array(@jobs.order(updated_at: :desc)).page(params[:page]).per(Settings.jobs.limit)
+      @jobs = @jobs.order(updated_at: :desc).page(params[:page]).per(Settings.jobs.limit)
     else
+
       @name = "Find: " + params[:search]
       @name += " at " + params[:city] unless params[:city].empty?
       @name += " in " + params[:industry] unless params[:industry].empty?
