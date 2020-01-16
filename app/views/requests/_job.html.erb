@@ -6,10 +6,17 @@
           <%= link_to job_path(job.job_id) do %>
             <h4 class="text-dark"><%= job.job_name %></h4>
             <h6><i class="fa fa-suitcase"></i> <%= job.company_name %></h6>
-            <h6>
-              <i class="fa fa-map-pin"></i> <%= job.city_name %>                   
-              <i class="fa fa-dollar pl-5"></i> <%= job.job_salary %>
-              <i class="fa fa-envelope pl-5"></i> <%= job.created_at.strftime("Applied at: %I:%M %p, %m/%d/%Y") %>
+            <% if user_signed_in? %>
+              <h6>
+                <i class="fa fa-map-pin"></i> <%= job.city_name %>
+                <i class="fa fa-dollar pl-5"></i> <%= job.job_salary %>
+            <% elsif admin_signed_in? %>
+              <h6>
+                <i class="fa fa-user"></i> <%= job.fname %> <%= job.lname %>
+                <i class="fa fa-vcard pl-5"></i> <%= job.cv %>
+                <i class="fa fa-at pl-5"></i> <%= job.email %>
+            <% end %>
+            <i class="fa fa-envelope pl-5"></i> <%= job.created_at.strftime("Applied at: %I:%M %p, %m/%d/%Y") %>
             </h6>
           <% end %>
         </div>

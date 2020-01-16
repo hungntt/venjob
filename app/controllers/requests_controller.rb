@@ -7,10 +7,6 @@ class RequestsController < ApplicationController
     @applied_job = current_user.requests
   end
 
-
-  def create
-  end
-
   def done
     if @request.save
       flash.now[:success] = "Successfully apply. Check mail confirmation at #{@request.email}"
@@ -18,9 +14,6 @@ class RequestsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
   end
 
   def new
@@ -50,7 +43,7 @@ class RequestsController < ApplicationController
 
   def check_input
     unless @request.valid?
-      flash[:danger] = "Missing requirements: " + @request.errors.full_messages.join(", ") + ". Please click 'Edit' to fill the form again."
+      flash[:danger] = "Missing requirements: " + @request.errors.full_messages.join(", ") + ". Please edit the form again."
       redirect_to new_job_request_path
     end
   end
