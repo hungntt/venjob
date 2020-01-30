@@ -66,4 +66,6 @@ gem "pry"
 gem "stringex"
 gem "rsolr"
 gem "rsolr-ext"
-
+gem "ransack"
+gem "faker"
+gem "carrierwave"
