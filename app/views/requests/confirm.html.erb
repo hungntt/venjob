@@ -4,7 +4,7 @@
   </div>
   <div class="container bg-light border border-dark rounded-lg p-5">
     <%= render "step_navigation" %>
-    <%= form_for (@request), url: job_requests_done_path(@job), method: :get, html: {class: "form-horizontal center"} do |f| %>
+    <%= form_for (@request), url: job_requests_done_path(@job), method: :post, html: {multipart: true} do |f| %>
       <div class="form-row">
         <div class="col no-padding">
           <label>Job name:</label> <%= @job.name %>
@@ -30,14 +30,15 @@
       </div>
       <div class="form-row">
         <div class="col no-padding">
-          <label>CV link:</label> <%= @request.cv %>
-          <%= f.hidden_field(:cv, value: @request.cv) %>
+          <% @request.cv = params[:request][:cv] %>
+          <label>CV link:</label> <%= link_to "See your CV", @request.cv_url, target: '_blank' %>
+          <%= f.hidden_field(:cv, value: @request.cv )%>
         </div>
       </div>
 
       <div class="row align-center">
         <div class="col-4 col-md-10 text-right">
-          <%= link_to "Edit", new_job_request_path(request: { fname: @request.fname, lname: @request.lname, email: @request.email, cv: @request.cv }), method: :get, class: "btn btn-secondary py-2 px-4" %>
+          <%= link_to "Edit", new_job_request_path(request: {fname: @request.fname, lname: @request.lname, email: @request.email, cv: @request.cv}), method: :get, class: "btn btn-secondary py-2 px-4" %>
         </div>
         <div class="col-4 col-md-1 text-left">
           <%= f.submit "Submit", class: "btn btn-info px-5 py-2" %>

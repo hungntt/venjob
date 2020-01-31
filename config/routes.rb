@@ -25,9 +25,9 @@ Rails.application.routes.draw do
   end
 
   resources :jobs do
-    resources :requests, only: %i[new]
-    get "requests/confirm", to: "requests#confirm"
-    get "requests/done", to: "requests#done"
+    resources :requests, only: %i[new create index]
+    post "requests/confirm", to: "requests#confirm"
+    post "requests/done", to: "requests#done"
 
     resources :favorites, only: %i[create destroy]
   end

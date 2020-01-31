@@ -13,7 +13,8 @@
             <% elsif admin_signed_in? %>
               <h6>
                 <i class="fa fa-user"></i> <%= job.fname %> <%= job.lname %>
-                <i class="fa fa-vcard pl-5"></i> <%= job.cv %>
+                <i class="fa fa-vcard pl-5 text-primary"></i> <%= link_to "Download CV", job.cv_url, download: job.cv_url, target: '_blank', class: "text-primary" %>
+                <%#= job.cv %>
                 <i class="fa fa-at pl-5"></i> <%= job.email %>
             <% end %>
             <i class="fa fa-envelope pl-5"></i> <%= job.created_at.strftime("Applied at: %I:%M %p, %m/%d/%Y") %>
