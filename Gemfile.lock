@@ -341,6 +341,7 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    kgio (2.11.3)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -423,6 +424,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
+    raindrops (0.19.1)
     rake (13.0.1)
     ransack (2.3.2)
       activerecord (>= 5.2.1)
@@ -505,6 +507,9 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
+    unicorn (5.5.2)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.1)
@@ -538,6 +543,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capistrano (= 3.11.2)
+  capistrano-bundler
   capistrano-passenger (= 0.2.0)
   capistrano-rails (= 1.4.0)
   capistrano-rbenv (= 2.1.4)
@@ -573,6 +579,7 @@ DEPENDENCIES
   stringex
   turbolinks (~> 5)
   tzinfo-data
+  unicorn
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)

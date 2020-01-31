@@ -2,6 +2,9 @@
 lock "~> 3.11.2"
 
 set :application, "venjob"
+set :deploy_user, 'deploy'
+
+set :scm, :git
 set :repo_url, "git@gitlab.zigexn.vn:hungntt/venjob.git"
 set :branch, "create-admin"
 # Default branch is :master
@@ -37,3 +40,5 @@ append :linked_files, "config/master.key"
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+set(:executable_config_files, %w(unicorn_init.sh))
