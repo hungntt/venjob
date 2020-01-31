@@ -7,8 +7,23 @@ class RequestsController < ApplicationController
     @applied_job = current_user.requests
   end
 
+  def new
+    if params[:request].present?
+      @request = @job.requests.new(request_params)
+      @request.cv = @@temp.cv
+    else
+      @request = @job.requests.new
+    end
+  end
+
+  def confirm
+    @@temp = @request
+    @@temp.store_cv!
+  end
+
   def done
-    if @request.save
+    @request.cv = @@temp.cv
+    if @request.save!
       flash.now[:success] = "Successfully apply. Check mail confirmation at #{@request.email}"
       @request.send_confirmation_email
     else
@@ -16,20 +31,11 @@ class RequestsController < ApplicationController
     end
   end
 
-  def new
-    @request = if params[:request].present?
-                 @job.requests.new(request_params)
-               else
-                 @job.requests.new
-               end
-  end
-
-  def confirm
-  end
-
   private
 
   def load_job
+    return redirect_back(fallback_location: root_path) if params[:job_id].nil?
+
     @job = Job.find_by(id: params[:job_id])
   end
 

@@ -7,6 +7,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require popper
+//= require jquery.elevatezoom
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()

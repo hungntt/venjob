@@ -20,11 +20,11 @@
                password_confirmation: password_confirmation)
 end
 
-20.times do |n|
-  user = User.find_by_id(n + 2)
-  Request.create!(job_id: n + 1,
-                  fname: user.fname,
-                  lname: user.lname,
-                  email: user.email,
-                  cv: Faker::File.file_name)
-end
+# 20.times do |n|
+#   user = User.find_by_id(n + 2)
+#   Request.create!(job_id: n + 1,
+#                   fname: user.fname,
+#                   lname: user.lname,
+#                   email: user.email,
+#                   cv: Faker::File.file_name)
+# end
