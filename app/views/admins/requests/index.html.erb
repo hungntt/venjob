@@ -4,20 +4,26 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 offset-md-2 my-5">
-      <%= form_tag url: admins_requests_path, html: {class: "form-horizontal center"} do %>
+      <%= search_form_for @query, url: admins_requests_path, html: {class: "form-horizontal center"} do |f| %>
         <div class="row">
-          <div class="col-md-2 text-left my-auto"><label>Email</label></div>
-          <div class="col-md-10">
-            <input class="form-control my-1" id="email" placeholder="Search by email" aria-label="Search" name="email" value="<%= params[:email] %>">
-          </div>
+          <%= f.label :email_cont, "Email", class: "label" %>
+          <%= f.email_field :email_cont, class: "form-control mb-3"  %>
+<!--          <div class="col-md-2 text-left my-auto"><label>Email</label></div>-->
+<!--          <div class="col-md-10">-->
+<!--            <input class="form-control my-1" id="email" placeholder="Search by email" aria-label="Search" name="email" value="<%#= params[:email] %>">-->
+<!--          </div>-->
         </div>
         <div class="row">
-          <div class="col-md-2 text-left my-auto"><label>City</label></div>
-          <div class="col-md-10"><%= select_tag "city", options_from_collection_for_select(cities_list, "id", "name", params[:city]), include_blank: "Select city", class: "form-control my-1" %></div>
+          <%= f.label :city_id_eq, "City", class: "label" %>
+          <%= f.select :city_id_eq, options_from_collection_for_select(cities_list, "id", "name", params[:city]), { include_blank: true }, class: "form-control mb-3"  %>
+<!--          <div class="col-md-2 text-left my-auto"><label>City</label></div>-->
+<!--          <div class="col-md-10"><%#= select_tag "city", options_from_collection_for_select(cities_list, "id", "name", params[:city]), include_blank: "Select city", class: "form-control my-1" %></div>-->
         </div>
         <div class="row">
-          <div class="col-md-2 text-left text-middle my-auto">Industry</div>
-          <div class="col-md-10"><%= select_tag "industry", options_from_collection_for_select(industries_list, "id", "name", params[:industry]), include_blank: "Select industry", class: "form-control my-1" %></div>
+          <%= f.label :industries_id_eq, "Industry", class: "label" %>
+          <%= f.select :industries_id_eq, options_from_collection_for_select(industries_list, "id", "name", params[:industry]),  { include_blank: true },  class: "form-control mb-3" %>
+<!--          <div class="col-md-2 text-left text-middle my-auto">Industry</div>-->g
+<!--          <div class="col-md-10"><%#= select_tag "industry", options_from_collection_for_select(industries_list, "id", "name", params[:industry]), include_blank: "Select industry", class: "form-control my-1" %></div>-->
         </div>
         <div class="row">
           <div class="col-md-2 text-left my-auto"><label>Date</label></div>

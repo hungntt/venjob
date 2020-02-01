@@ -66,4 +66,4 @@ gem "pry"
 gem "stringex"
 gem "rsolr"
 gem "rsolr-ext"
-
+gem "ransack"

@@ -116,12 +116,12 @@ namespace :job do
   desc "CSV job crawler"
 
   task csv_import: :environment do
-    Net::FTP.open("192.168.1.156", "training", "training")
-    Zip::File.open("jobs.zip") do |zip_file|
-      zip_file.each do |entry|
-        entry.extract { true }
-      end
-    end
+    #Net::FTP.open("192.168.1.156", "training", "training")
+    #Zip::File.open("jobs.zip") do |zip_file|
+    #  zip_file.each do |entry|
+    #    entry.extract { true }
+    #  end
+    #end
     CSV.foreach("jobs.csv", headers: true).with_index do |row, i|
       puts i
       job_industry = row["category"]
