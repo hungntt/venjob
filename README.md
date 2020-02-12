@@ -1,3 +1,8 @@
+Website: http://venjob.herokuapp.com/
+- Ruby version: 6
+- Database: mysql2
+- Stylesheet: bootstrap 4, scss
+
 # DATABASE
 * Create model User with Devise.
 * Create other models and their associations based on the database model.
