@@ -1,5 +1,5 @@
 Website: http://venjob.herokuapp.com/
-- Ruby version: 6
+- Ruby on Rails version: 6
 - Database: mysql2
 - Stylesheet: bootstrap 4, scss
 
